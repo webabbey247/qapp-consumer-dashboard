@@ -1,15 +1,15 @@
 export const SidebarData = [
   {
     title: "Dashboard",
-    path: "/dashboard",
+    path: "/",
     icon: require("../assets/images/dashboard-icon.png"),
   },
   {
     title: "Services",
     path: "/services",
     icon: require("../assets/images/services-icon.png"),
-    iconClosed: require("../assets/images/menu-dropdown-right-icon.png"),
-    iconOpened: require("../assets/images/menu-dropdown-icon.png"),
+    iconClosed: require("../assets/images/menu-dropdown-icon.png"),
+    iconOpened: require("../assets/images/menu-dropdown-right-icon.png"),
     subNav: [
       {
         title: "Deposit",
