@@ -32,6 +32,42 @@ const SidebarWrapper = styled.div`
   width: 100%;
 `;
 
+const SidebarFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid rgba(185, 185, 185, 0.5);
+`;
+
+const SidebarFooterTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 0.4rem;
+`;
+
+const SidebarFooterBtn = styled.button`
+  padding: 0.6rem 2rem;
+  background: #5eaaa8;
+  border-radius: 62px;
+  border: 1px solid #5eaaa8;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 17px;
+  text-align: center;
+  color: #032130;
+  cursor: pointer;
+`;
+
+const SidebarFooterBottomText = styled.div`
+  text-align: center;
+  margin-top: 0.8rem;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ced7da;
+`;
+
 const Sidebar = () => {
   return (
     <>
@@ -45,6 +81,13 @@ const Sidebar = () => {
             return <SubMenu item={item} key={index} />;
           })}
         </SidebarWrapper>
+        <SidebarFooter>
+          <SidebarFooterTop>
+            <SidebarFooterBtn>Logout</SidebarFooterBtn>
+            <SidebarFooterBtn>Support</SidebarFooterBtn>
+          </SidebarFooterTop>
+          <SidebarFooterBottomText>v 1.0.0</SidebarFooterBottomText>
+        </SidebarFooter>
       </SidebarContainer>
     </>
   );

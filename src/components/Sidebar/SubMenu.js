@@ -44,19 +44,25 @@ const SidebarNavIcon = styled.img`
 `;
 
 const DropdownLink = styled(Link)`
-  background: #2f9d9a;
+  background: #063043;
   padding: 0.8rem 0 0.8rem 2rem;
   display: flex;
   align-items: center;
   text-decoration: none;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 16px;
-  color: #bdf0ec;
+  border-left: 4px solid #2f9d9a;
+
   &:hover {
     background: #063043;
     cursor: pointer;
   }
+`;
+
+const SidebarSubMenuLabel = styled.span`
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+  color: #bdf0ec;
+  margin-left: 16px;
 `;
 
 const SubMenu = ({item}) => {
@@ -91,7 +97,7 @@ const SubMenu = ({item}) => {
           return (
             <DropdownLink to={item.path} key={index}>
               {item.icon}
-              <SidebarNavLabel>{item.title}</SidebarNavLabel>
+              <SidebarSubMenuLabel>{item.title}</SidebarSubMenuLabel>
             </DropdownLink>
           );
         })}

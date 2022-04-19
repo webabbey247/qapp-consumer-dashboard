@@ -4,8 +4,11 @@ import styled from "styled-components";
 export const TotalAccountBalanceContainer = styled.div`
   width: 235px;
   height: 235px;
+  // background: linear-gradient(180deg, rgba(151, 255, 252, 0.8448) -87.84%, rgba(47, 157, 154, 0.96) 100%);
   border: 12px solid rgba(22, 227, 255, 0.32);
   border-radius: 250px;
+  box-shadow: rgba(22, 227, 255, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px 18px inset;
 `;
 
 export const TotalAccountBalanceWrapper = styled.div`
