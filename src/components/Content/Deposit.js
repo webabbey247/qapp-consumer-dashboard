@@ -138,18 +138,18 @@ export const TransactionHistoryContainer = styled.div`
   overflow-x: hidden;
 `;
 
-const Content = () => {
+const Deposit = () => {
   return (
     <>
       <ContentContainer>
         <ContentTopContainer>
           <ContentTopContainerLTR>
             <ContentTopContainerLTRGreetings>
-              Goood Afternoon Kuti.
+            Change Pin
             </ContentTopContainerLTRGreetings>
-            <ContentTopContainerLTRLoginInfo>
+            {/* <ContentTopContainerLTRLoginInfo>
               Last Login: Yesterday, 2:00pm
-            </ContentTopContainerLTRLoginInfo>
+            </ContentTopContainerLTRLoginInfo> */}
           </ContentTopContainerLTR>
           <ContentTopContainerRTL>
             <ContentTopContainerBvnNin>
@@ -195,4 +195,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default Deposit;

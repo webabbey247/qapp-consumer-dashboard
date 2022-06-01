@@ -29,34 +29,34 @@ export const SidebarData = [
     title: "Cards",
     path: "/cards",
     icon: require("../assets/images/cc-icon.png"),
-    iconClosed: require("../assets/images/menu-dropdown-right-icon.png"),
-    iconOpened: require("../assets/images/menu-dropdown-icon.png"),
-    subNav: [
-      {
-        title: "Debit Cards",
-        path: "/cards/debit-cards",
-      },
-      {
-        title: "Credit Cards",
-        path: "/card/credit-cards",
-      },
-    ],
+    // iconClosed: require("../assets/images/menu-dropdown-right-icon.png"),
+    // iconOpened: require("../assets/images/menu-dropdown-icon.png"),
+    // subNav: [
+    //   {
+    //     title: "Debit Cards",
+    //     path: "/cards/debit-cards",
+    //   },
+    //   {
+    //     title: "Credit Cards",
+    //     path: "/card/credit-cards",
+    //   },
+    // ],
   },
   {
     title: "Loans",
     path: "/loans",
     icon: require("../assets/images/money-icon.png"),
   },
-  {
-    title: "Investment",
-    path: "/investment",
-    icon: require("../assets/images/agent-icon.png"),
-  },
-  {
-    title: "Donations",
-    path: "/donations",
-    icon: require("../assets/images/money-icon.png"),
-  },
+  // {
+  //   title: "Investment",
+  //   path: "/investment",
+  //   icon: require("../assets/images/agent-icon.png"),
+  // },
+  // {
+  //   title: "Donations",
+  //   path: "/donations",
+  //   icon: require("../assets/images/money-icon.png"),
+  // },
   {
     title: "Utility",
     path: "/utility",
@@ -66,5 +66,21 @@ export const SidebarData = [
     title: "Settings",
     path: "/settings",
     icon: require("../assets/images/settings-icon.png"),
+    iconClosed: require("../assets/images/menu-dropdown-right-icon.png"),
+    iconOpened: require("../assets/images/menu-dropdown-icon.png"),
+    subNav: [
+      {
+        title: "Change Password",
+        path: "/settings/update-password",
+      },
+      {
+        title: "Change Transaction Pin",
+        path: "/settings/update-transaction-pin",
+      },
+      {
+        title: "Security Questions",
+        path: "/settings/update-security-questions",
+      },
+    ],
   },
 ];

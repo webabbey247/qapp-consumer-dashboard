@@ -65,7 +65,7 @@ const SidebarSubMenuLabel = styled.span`
   margin-left: 16px;
 `;
 
-const SubMenu = ({item}) => {
+const SubMenu = ({item, key}) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
   let resolved = useResolvedPath(item.path);
@@ -73,6 +73,7 @@ const SubMenu = ({item}) => {
   return (
     <>
       <SidebarNavLink
+      key={key}
         {...(match ? "active" : "")}
         to={item.path}
         onClick={item.subNav && showSubnav}

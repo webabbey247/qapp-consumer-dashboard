@@ -1,12 +1,7 @@
-import React from "react";
+import React from 'react';
 import styled from "styled-components";
 import {dummyProfileImg, notificationIcon} from "../../assets";
-
-import Operations from "../Operations/Operations";
-import AccountSummary from "../AccountSummary/AccountSummary";
-import Ads from "../Ads/Ads";
-import TransactionHistory from "../TransactionHistory/TransactionHistory";
-import { ContentFullColumn, ContentRow } from "../../GlobalCss";
+import { UpdatePasswordForm } from '../Forms';
 
 export const ContentContainer = styled.div`
   flex: 0 0 80%;
@@ -27,7 +22,7 @@ export const ContentTopContainerLTR = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export const ContentTopContainerLTRGreetings = styled.h2`
+export const ContentTopContainerPageTitle = styled.h2`
   font-weight: 700;
   font-size: 24px;
   line-height: 31px;
@@ -110,46 +105,29 @@ export const ContentBottomContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding-top: 1rem;
+  justify-content: center;
+  align-content: center;
 `;
 
-export const ContenBottomContainerLTR = styled.div`
-  flex: 0 0 60%;
-  max-width: 60%;
-  height: 86.7vh;
+export const ContentFormWrapper = styled.div`
+background: linear-gradient(148.41deg, rgba(196, 196, 196, 0.0728) -13.63%, rgba(9, 53, 74, 0.28) 154.42%);
+backdrop-filter: blur(8px);
+border-radius: 10px;
+padding: 2rem 0;
+width: min(100%, 45rem);
+margin-top: 4rem;
 `;
 
-export const ContentBottomContainerRTL = styled.div`
-  flex: 0 0 40%;
-  max-width: 40%;
-  height: 86.7vh;
-  padding-left: 1.5rem;
-`;
 
-export const TransactionHistoryContainer = styled.div`
-  margin-bottom: 1rem;
-  height: 307px;
-  background: linear-gradient(
-    91.43deg,
-    rgba(255, 255, 255, 0.0728) -19.87%,
-    rgba(251, 251, 251, 0.084) 116%
-  );
-  backdrop-filter: blur(26px);
-  border-radius: 10px;
-  overflow-x: hidden;
-`;
-
-const Content = () => {
+const ResetPasswordContent = () => {
   return (
     <>
-      <ContentContainer>
+     <ContentContainer>
         <ContentTopContainer>
           <ContentTopContainerLTR>
-            <ContentTopContainerLTRGreetings>
-              Goood Afternoon Kuti.
-            </ContentTopContainerLTRGreetings>
-            <ContentTopContainerLTRLoginInfo>
-              Last Login: Yesterday, 2:00pm
-            </ContentTopContainerLTRLoginInfo>
+            <ContentTopContainerPageTitle>
+            Change Pin
+            </ContentTopContainerPageTitle>
           </ContentTopContainerLTR>
           <ContentTopContainerRTL>
             <ContentTopContainerBvnNin>
@@ -170,29 +148,15 @@ const Content = () => {
             </ContentTopProfileNotification>
           </ContentTopContainerRTL>
         </ContentTopContainer>
-        <ContentBottomContainer>
-          <ContenBottomContainerLTR>
-            <AccountSummary />
-            
-          </ContenBottomContainerLTR>
-          <ContentBottomContainerRTL>
-            {/* <Ads /> */}
-            <Operations />
-          </ContentBottomContainerRTL>
-
-        </ContentBottomContainer>
-
         
-        {/* <ContentRow>
-          <ContentFullColumn>
-            <TransactionHistoryContainer>
-              <TransactionHistory />
-            </TransactionHistoryContainer>
-          </ContentFullColumn>
-        </ContentRow> */}
+        <ContentBottomContainer>
+        <ContentFormWrapper>
+           <UpdatePasswordForm />
+        </ContentFormWrapper>
+        </ContentBottomContainer>
       </ContentContainer>
     </>
-  );
-};
+  )
+}
 
-export default Content;
+export default ResetPasswordContent;

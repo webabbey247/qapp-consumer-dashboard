@@ -3,9 +3,6 @@
         "Dark+": {
             "titleBar.activeBackground": "#40ae14",
             "titleBar.activeForeground": "#f4fd6a"
-        },
-        "activityBar.background": "#072B65",
-        "titleBar.activeBackground": "#0A3C8E",
-        "titleBar.activeForeground": "#FAFCFF"
+        }
     }
 }

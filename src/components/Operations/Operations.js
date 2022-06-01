@@ -24,7 +24,7 @@ export const OperationsContainer = styled.div`
   );
   backdrop-filter: blur(8px);
   border-radius: 10px;
-  padding: 1rem 0.5rem;
+  padding: 2rem 0.5rem;
 `;
 
 export const OperationsCard = styled.div`
@@ -83,11 +83,12 @@ const Operations = () => {
           <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
-                <OperationsCardIcon src={topUpIcon} alt='Top Up' />
+                <OperationsCardIcon src={withdrawIcon} alt='Withdraw' />
               </OperationsCardIconHolder>
-              <OperationsCardName>Top Up</OperationsCardName>
+              <OperationsCardName>Withdraw</OperationsCardName>
             </OperationsCard>
           </Content4Column4>
+         
           <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
@@ -96,14 +97,16 @@ const Operations = () => {
               <OperationsCardName>Card</OperationsCardName>
             </OperationsCard>
           </Content4Column4>
+         
           <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
-                <OperationsCardIcon src={withdrawIcon} alt='Withdraw' />
+                <OperationsCardIcon src={topUpIcon} alt='Top Up' />
               </OperationsCardIconHolder>
-              <OperationsCardName>Withdraw</OperationsCardName>
+              <OperationsCardName>Top Up</OperationsCardName>
             </OperationsCard>
           </Content4Column4>
+
           <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
@@ -120,14 +123,14 @@ const Operations = () => {
               <OperationsCardName>Loan</OperationsCardName>
             </OperationsCard>
           </Content4Column4>
-          <Content4Column4>
+          {/* <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
                 <OperationsCardIcon src={donationIcon} alt='Donation' />
               </OperationsCardIconHolder>
               <OperationsCardName>Donation</OperationsCardName>
             </OperationsCard>
-          </Content4Column4>
+          </Content4Column4> */}
           <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
@@ -136,30 +139,30 @@ const Operations = () => {
               <OperationsCardName>Utility</OperationsCardName>
             </OperationsCard>
           </Content4Column4>
-          <Content4Column4>
+          {/* <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
                 <OperationsCardIcon src={fxTransferIcon} alt='FX Transfer' />
               </OperationsCardIconHolder>
               <OperationsCardName>FX Transfer</OperationsCardName>
             </OperationsCard>
-          </Content4Column4>
-          <Content4Column4>
+          </Content4Column4> */}
+          {/* <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
                 <OperationsCardIcon src={gamesIcon} alt='Games' />
               </OperationsCardIconHolder>
               <OperationsCardName>Games</OperationsCardName>
             </OperationsCard>
-          </Content4Column4>
-          <Content4Column4>
+          </Content4Column4> */}
+          {/* <Content4Column4>
             <OperationsCard>
               <OperationsCardIconHolder>
                 <OperationsCardIcon src={bettingIcon} alt='Betting' />
               </OperationsCardIconHolder>
               <OperationsCardName>Betting</OperationsCardName>
             </OperationsCard>
-          </Content4Column4>
+          </Content4Column4> */}
         </ContentRow>
       </OperationsContainer>
     </>
