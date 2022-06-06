@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import { UpdatePasswordForm, UpdatePinForm, UpdateQAForm } from '../Forms';
+import { LoanOptionsForm } from '../Forms';
 import ProfileHeader from '../ProfileHeader/ProfileHeader';
 import OptionCards from '../OptionCards/OptionCards';
+import { LoanAccountStatus, TransactionSummary } from '../Common';
+
+
 export const ContentContainer = styled.div`
   flex: 0 0 80%;
   max-width: 80;
   background: #063043;
   backdrop-filter: blur(26px);
-  height: 100vh;
+  height: 100%;
   padding: 0 2rem;
 `;
 
@@ -39,7 +42,7 @@ export const ContentTopContainerLTRLoginInfo = styled.p`
 export const ContentBottomContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
+  margin: 1rem 0;
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -49,13 +52,17 @@ export const ContentFormWrapper = styled.div`
 background: linear-gradient(148.41deg, rgba(196, 196, 196, 0.0728) -13.63%, rgba(9, 53, 74, 0.28) 154.42%);
 backdrop-filter: blur(8px);
 border-radius: 10px;
-padding: 2rem 0;
+padding: 1rem 0 0;
 width: min(100%, 45rem);
-margin-top: 4rem;
+margin: 2rem 0;
+
 `;
 
 
-const SettingsPageContent = ({ title, typeUrl }) => {
+const LoanPage = ({ title }) => {
+    const [stepOne, setStepOne] = useState(true);
+    const [stepTwo, setStepTwo] = useState(false);
+    const [stepThree, setStepThree] = useState(false);
     return (
         <>
             <ContentContainer>
@@ -65,21 +72,24 @@ const SettingsPageContent = ({ title, typeUrl }) => {
                             {title}
                         </ContentTopContainerPageTitle>
                     </ContentTopContainerLTR>
-                   <ProfileHeader />
+                    <ProfileHeader />
                 </ContentTopContainer>
 
                 <ContentBottomContainer>
-                  <OptionCards />
+                    <OptionCards stepOne={stepOne} stepTwo={stepTwo} stepThree={stepThree} />
                     <ContentFormWrapper>
-                        {typeUrl === "Pin" && (
-                            <UpdatePinForm />
+                        {stepOne && (
+                            <LoanOptionsForm setStepOne={setStepOne} setStepTwo={setStepTwo} setStepThree={setStepThree} />
                         )}
-                        {typeUrl === "Password" && (
-                        <UpdatePasswordForm />
+
+                        {stepTwo && (
+                            <LoanAccountStatus setStepOne={setStepOne} setStepTwo={setStepTwo} setStepThree={setStepThree} />
                         )}
-                         {typeUrl === "QA" && (
-                        <UpdateQAForm />
+
+                        {stepThree && (
+                            <TransactionSummary setStepOne={setStepOne} setStepTwo={setStepTwo} setStepThree={setStepThree} />
                         )}
+
                     </ContentFormWrapper>
                 </ContentBottomContainer>
             </ContentContainer>
@@ -87,4 +97,4 @@ const SettingsPageContent = ({ title, typeUrl }) => {
     )
 }
 
-export default SettingsPageContent;
+export default LoanPage;

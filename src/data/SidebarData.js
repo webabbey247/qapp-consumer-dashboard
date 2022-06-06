@@ -23,6 +23,10 @@ export const SidebarData = [
         title: "Transfer",
         path: "/services/transfer",
       },
+      {
+        title: "Utility",
+        path: "/services/utility",
+      },
     ],
   },
   {
@@ -57,11 +61,11 @@ export const SidebarData = [
   //   path: "/donations",
   //   icon: require("../assets/images/money-icon.png"),
   // },
-  {
-    title: "Utility",
-    path: "/utility",
-    icon: require("../assets/images/utility-icon-1.png"),
-  },
+  // {
+  //   title: "Utility",
+  //   path: "/utility",
+  //   icon: require("../assets/images/utility-icon-1.png"),
+  // },
   {
     title: "Settings",
     path: "/settings",

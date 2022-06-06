@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import { UpdatePasswordForm, UpdatePinForm, UpdateQAForm } from '../Forms';
 import ProfileHeader from '../ProfileHeader/ProfileHeader';
-import OptionCards from '../OptionCards/OptionCards';
+import CardOptionsCard from '../OptionCards/CardOptionsCard';
+import { CardsList } from '../Common';
+import { CardOperations } from '../../pages/Cards';
+
+
 export const ContentContainer = styled.div`
   flex: 0 0 80%;
   max-width: 80;
   background: #063043;
   backdrop-filter: blur(26px);
-  height: 100vh;
+  height: 100%;
   padding: 0 2rem;
 `;
 
@@ -39,7 +42,6 @@ export const ContentTopContainerLTRLoginInfo = styled.p`
 export const ContentBottomContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -49,13 +51,17 @@ export const ContentFormWrapper = styled.div`
 background: linear-gradient(148.41deg, rgba(196, 196, 196, 0.0728) -13.63%, rgba(9, 53, 74, 0.28) 154.42%);
 backdrop-filter: blur(8px);
 border-radius: 10px;
-padding: 2rem 0;
+padding: 1rem 0 0.5rem;
 width: min(100%, 45rem);
-margin-top: 4rem;
+margin: 2rem 0;
+
 `;
 
 
-const SettingsPageContent = ({ title, typeUrl }) => {
+const CardPage = ({ title }) => {
+    const [stepOne, setStepOne] = useState(true);
+    const [stepTwo, setStepTwo] = useState(false);
+    const [stepThree, setStepThree] = useState(false);
     return (
         <>
             <ContentContainer>
@@ -65,21 +71,23 @@ const SettingsPageContent = ({ title, typeUrl }) => {
                             {title}
                         </ContentTopContainerPageTitle>
                     </ContentTopContainerLTR>
-                   <ProfileHeader />
+                    <ProfileHeader />
                 </ContentTopContainer>
 
                 <ContentBottomContainer>
-                  <OptionCards />
+                    <CardOptionsCard stepOne={stepOne} stepTwo={stepTwo} stepThree={stepThree} />
                     <ContentFormWrapper>
-                        {typeUrl === "Pin" && (
-                            <UpdatePinForm />
-                        )}
-                        {typeUrl === "Password" && (
-                        <UpdatePasswordForm />
-                        )}
-                         {typeUrl === "QA" && (
-                        <UpdateQAForm />
-                        )}
+                    {stepOne && (
+                    <CardsList setStepOne={setStepOne} setStepTwo={setStepTwo} setStepThree={setStepThree} />
+                    )}
+
+                        {stepTwo && (
+                    <CardOperations etStepOne={setStepOne} setStepTwo={setStepTwo} setStepThree={setStepThree} />
+                          )}
+
+                        {/* {stepThree && (
+                    <CardOperations etStepOne={setStepOne} setStepTwo={setStepTwo} setStepThree={setStepThree} />
+                    )} */}
                     </ContentFormWrapper>
                 </ContentBottomContainer>
             </ContentContainer>
@@ -87,4 +95,4 @@ const SettingsPageContent = ({ title, typeUrl }) => {
     )
 }
 
-export default SettingsPageContent;
+export default CardPage;

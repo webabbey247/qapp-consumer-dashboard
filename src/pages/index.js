@@ -1,6 +1,13 @@
 import Homepage from "./Homepage";
 import NoMatch from "./NoMatch";
-import Login from "./Login";
 import { ChangeQA, ChangePin, ChangePassword } from "./Settings";
+import Loan from "./Loan/Loan";
 
-export {Homepage, NoMatch, Login, ChangeQA, ChangePin, ChangePassword};
+import {
+    CardGrid,
+    BlockCard,
+    ReplaceCard,
+    RetrieveCardPin
+} from "./Cards";
+
+export { Homepage, NoMatch, ChangeQA, ChangePin, ChangePassword, Loan, CardGrid, BlockCard, ReplaceCard, RetrieveCardPin };

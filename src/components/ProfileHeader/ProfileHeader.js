@@ -11,7 +11,7 @@ export const ContentTopContainerRTL = styled.div`
 export const ContentTopContainerBvnNin = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 `;
 
 export const ContentTopContainerBvnNinText = styled.p`

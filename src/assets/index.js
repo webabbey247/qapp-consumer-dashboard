@@ -22,8 +22,18 @@ const settingIcon = require("./images/settings-icon.png");
 const menuDropdownIcon = require("./images/menu-dropdown-icon.png");
 const menuDropRightIcon = require("./images/menu-dropdown-right-icon.png");
 const dummyThemeLogo = require("./images/theme-dummy-logo.png");
+const dummyBankOne = require("./images/access-bank-logo.png");
+const dummyBankTwo = require("./images/zenith-bank-logo.png");
+const dummyBankThree = require("./images/first-bank-logo.png");
+const cardIcon = require("./images/cc-icon.png");
+const loanNavIcon = require("./images/money-icon.png");
+const dummyFlag = require("./images/icons/dummyFlag.png");
+
 
 export {
+  cardIcon,
+  loanNavIcon,
+  dummyFlag,
   dummyThemeLogo,
   dummyProfileImg,
   notificationIcon,
@@ -48,4 +58,7 @@ export {
   settingIcon,
   menuDropdownIcon,
   menuDropRightIcon,
+  dummyBankOne,
+  dummyBankTwo,
+  dummyBankThree
 };
