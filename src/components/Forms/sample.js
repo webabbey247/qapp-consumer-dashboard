@@ -3,20 +3,36 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import swal from "sweetalert";
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, CustomRouterLink, GeneralSmText } from '../../GlobalCss';
 import {
     ContentForm,
     FormInput
 } from '../../assets/styles/FormCss';
-import { apiAuth } from '../../utils/config';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { login, reset } from '../../features/auth/authSlice';
 
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    // const dispatch = useDispatch();
+
+    // const { loginInfo, isError, isSuccess } = useSelector(
+    //     (state) => state.auth
+    //   );
+
+      React.useEffect(() => {
+        // if (isError) {
+        //     console.log(loginInfo.message ? loginInfo.message : "This isError message is null");
+        //   }
+
+        //   if (isSuccess) {
+        //     // localStorage.setItem("b_token", loginInfo.result.token);
+        //     // localStorage.setItem("b_user", loginInfo.result);
+        //     console.log(loginInfo.message ? loginInfo.message : "This isSuccess message is null");
+        //   }
+      
+      });
+    
 
     const validationSchema = yup.object().shape({
         accountNumber: yup
@@ -29,8 +45,9 @@ const LoginForm = () => {
             .string()
             .trim()
             .required("Kindly provide a your unique password!")
-            .min(5, ({ min }) => `Password must be atleast ${min} characters`)
-            .max(8, ({ max }) => `Password must be atleast ${max} characters`),
+            .min(6, ({ min }) => `Password must be atleast ${min} characters`)
+            .max(6, ({ max }) => `Password must be atleast ${max} characters`),
+        //   .min(6, "Password must be at least 6 characters!"),
     });
 
     const { register, handleSubmit, reset, formState } = useForm({
@@ -40,30 +57,14 @@ const LoginForm = () => {
     const { errors } = formState;
 
     const loginForm = (data) => {
-        setLoading(true);
         const userInfo = {
             accountNo: data.accountNumber,
             password: data.passcode,
         };
-
-        apiAuth.post("/login", userInfo).then((res) => {
-            console.log("Login form checker", res.data)
-            if(res.data.status ===  false){
-                console.log(res.data.message ? res.data.message : "")
-            } else {
-                localStorage.setItem("b_token", res.data.result.jwt);
-                 localStorage.setItem("b_user", JSON.stringify(res.data.result));
-                 setTimeout(() => {
-                    navigate("/dashboard");
-                    swal("Success", "You have successfully logged in", "success");-
-                  }, 1000)
-                console.log("JWT token checker", res.data.result.jwt);
-                console.log("Payload checker", res.data.result);
-            }
-        });
         console.log("Tracking Login Info", userInfo);
-        setLoading(false);
-        reset();
+        // dispatch(login(userInfo));
+
+        // reset();
     };
 
 
@@ -81,7 +82,7 @@ const LoginForm = () => {
                     </ContentFullColumn>
 
                     <ContentFullColumn>
-                        <FormInput name='passcode' type="password" placeholder="Password" maxLength={8} {...register("passcode")} />
+                        <FormInput name='passcode' type="pqassword" placeholder="Password" maxLength={6} {...register("passcode")} />
                         {errors.passcode && (
                              <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
                             {errors.passcode.message}
