@@ -4,15 +4,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import swal from "sweetalert";
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, CustomRouterLink, GeneralSmText } from '../../GlobalCss';
 import {
     ContentForm,
     FormInput
 } from '../../assets/styles/FormCss';
 import { apiAuth } from '../../utils/config';
-
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -22,13 +19,13 @@ const LoginForm = () => {
         accountNumber: yup
             .string()
             .trim()
-            .required("Kindly provide a valid email address!")
+            .required("Kindly provide a valid account number!")
             .min(10, ({ min }) => `Password must be atleast ${min} characters`)
             .max(10, ({ max }) => `Password must be atleast ${max} characters`),
         passcode: yup
             .string()
             .trim()
-            .required("Kindly provide a your unique password!")
+            .required("Kindly provide your unique passcode!")
             .min(5, ({ min }) => `Password must be atleast ${min} characters`)
             .max(8, ({ max }) => `Password must be atleast ${max} characters`),
     });
@@ -47,26 +44,24 @@ const LoginForm = () => {
         };
 
         apiAuth.post("/login", userInfo).then((res) => {
-            console.log("Login form checker", res.data)
-            if(res.data.status ===  false){
+            // console.log("Login form checker", res.data)
+            if(res.data.success ===  false){
                 console.log(res.data.message ? res.data.message : "")
             } else {
                 localStorage.setItem("b_token", res.data.result.jwt);
                  localStorage.setItem("b_user", JSON.stringify(res.data.result));
                  setTimeout(() => {
                     navigate("/dashboard");
-                    swal("Success", "You have successfully logged in", "success");-
+                    swal("Success", "You have successfully logged in", "success");
                   }, 1000)
-                console.log("JWT token checker", res.data.result.jwt);
-                console.log("Payload checker", res.data.result);
+                // console.log("JWT token checker", res.data.result.jwt);
+                // console.log("Payload checker", res.data.result);
             }
         });
         console.log("Tracking Login Info", userInfo);
         setLoading(false);
         reset();
     };
-
-
 
     return (
         <>
@@ -77,7 +72,8 @@ const LoginForm = () => {
                         {errors.accountNumber && (
                              <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
                             {errors.accountNumber.message}
-                         </GeneralSmText>)}
+                         </GeneralSmText>
+                         )}
                     </ContentFullColumn>
 
                     <ContentFullColumn>
@@ -94,7 +90,7 @@ const LoginForm = () => {
                     </ContentFullColumn>
                     <ContentFullColumn>
                         <CustomDiv display="flex" flexDirection="row" justifyContent="center" width="100%">
-                            <DefaultButton>Login</DefaultButton>
+                            <DefaultButton>{loading ? "Loading" : "Login"}</DefaultButton>
                         </CustomDiv>
                     </ContentFullColumn>
                     <ContentFullColumn>

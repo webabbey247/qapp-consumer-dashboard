@@ -75,18 +75,6 @@ export const TransactionHistoryContainer = styled.div`
 const Content = () => {
   return (
     <>
-      <ContentContainer>
-        <ContentTopContainer>
-          <ContentTopContainerLTR>
-            <ContentTopContainerLTRGreetings>
-              Goood Afternoon Kuti.
-            </ContentTopContainerLTRGreetings>
-            <ContentTopContainerLTRLoginInfo>
-              Last Login: Yesterday, 2:00pm
-            </ContentTopContainerLTRLoginInfo>
-          </ContentTopContainerLTR>
-          <ProfileHeader />
-        </ContentTopContainer>
         <ContentBottomContainer>
           <ContenBottomContainerLTR>
             <AccountSummary />
@@ -98,16 +86,6 @@ const Content = () => {
           </ContentBottomContainerRTL>
 
         </ContentBottomContainer>
-
-        
-        {/* <ContentRow>
-          <ContentFullColumn>
-            <TransactionHistoryContainer>
-              <TransactionHistory />
-            </TransactionHistoryContainer>
-          </ContentFullColumn>
-        </ContentRow> */}
-      </ContentContainer>
     </>
   );
 };

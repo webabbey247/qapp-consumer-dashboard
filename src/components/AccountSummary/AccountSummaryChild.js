@@ -1,4 +1,5 @@
 import React from "react";
+import NumberFormat from "react-number-format";
 import styled from "styled-components";
 
 export const AccountSummaryChildContainer = styled.div`
@@ -56,19 +57,28 @@ export const AccountSummaryChildRTLText = styled.p`
   }
 `;
 
-const AccountSummaryChild = () => {
+const AccountSummaryChild = ({data, index}) => {
   return (
     <>
-      <AccountSummaryChildContainer>
+      <AccountSummaryChildContainer key={index}>
         <AccountSummaryChildLTR>
           <AccountSummaryChildLTRTopText>Balance</AccountSummaryChildLTRTopText>
-          <AccountSummaryChildLTRBottomText>
-            N5,000.00
-          </AccountSummaryChildLTRBottomText>
+          <NumberFormat
+            value={data.balance}
+            displayType="text"
+            thousandSeparator
+            decimalScale={2}
+            fixedDecimalScale
+            prefix={"N"}
+            renderText={(value) =>  <AccountSummaryChildLTRBottomText>{`${value}`}</AccountSummaryChildLTRBottomText>} />
+          {/* <AccountSummaryChildLTRBottomText>
+           {data.balance}
+          </AccountSummaryChildLTRBottomText> */}
         </AccountSummaryChildLTR>
         <AccountSummaryChildRTL>
           <AccountSummaryChildRTLText>Account No</AccountSummaryChildRTLText>
-          <AccountSummaryChildRTLText>0342880912</AccountSummaryChildRTLText>
+         
+          <AccountSummaryChildRTLText>  {data.accountNumber}</AccountSummaryChildRTLText>
         </AccountSummaryChildRTL>
       </AccountSummaryChildContainer>
     </>

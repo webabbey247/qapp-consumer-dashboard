@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import NumberFormat from 'react-number-format';
+
 
 export const TotalAccountBalanceContainer = styled.div`
   width: 235px;
@@ -49,17 +51,26 @@ export const TotalAccountBalanceBottomText = styled.p`
   margin-top: 0.5rem;
 `;
 
-const TotalAccountBalance = () => {
+const TotalAccountBalance = ({ summaryData }) => {
+  // console.log("this is my summmary check", summaryData)
+  const totalBalance = summaryData.map(account => account.balance).reduce((a, b) => a + b)
+  const totalAccount = summaryData.length;
+
   return (
     <>
       <TotalAccountBalanceContainer>
         <TotalAccountBalanceWrapper>
           <TotalAccountBalanceTopText>Total Balance</TotalAccountBalanceTopText>
-          <TotalAccountBalanceMiddleText>
-            N75,000.00
-          </TotalAccountBalanceMiddleText>
+          <NumberFormat
+            value={totalBalance}
+            displayType="text"
+            thousandSeparator
+            decimalScale={2}
+            fixedDecimalScale
+            prefix={"N"}
+            renderText={(value) => <TotalAccountBalanceMiddleText>{`${value}`}</TotalAccountBalanceMiddleText>} />
           <TotalAccountBalanceBottomText>
-            3 Accounts
+            {totalAccount}  {totalAccount <= 1 ? "Account" : "Accounts"}
           </TotalAccountBalanceBottomText>
         </TotalAccountBalanceWrapper>
       </TotalAccountBalanceContainer>

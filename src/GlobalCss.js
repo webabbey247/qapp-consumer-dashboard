@@ -161,9 +161,9 @@ export const CustomButton = styled.button`
 
 export const DefaultButton = styled.button`
 padding: 1rem 3rem;
-background: #FC7620;
+background: ${(props) => props.background || "#FC7620"};
 border-radius: 5px;
-border: 1px solid #FC7620;
+border: 1px solid ${(props) => props.border || "#FC7620"};
 font-weight: 700;
 font-size: 17px;
 line-height: 22px;

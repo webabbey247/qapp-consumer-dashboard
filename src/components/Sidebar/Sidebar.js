@@ -193,7 +193,7 @@ const Sidebar = () => {
       <SidebarContainer>
         <SidebarNavContainer>
           <SidebarNavHeader>
-            <SidebarLogoLink to='#'>
+            <SidebarLogoLink to='/'>
               <SidebarLogo src={dummyThemeLogo} alt='Bank One' />
             </SidebarLogoLink>
           </SidebarNavHeader>
@@ -201,7 +201,7 @@ const Sidebar = () => {
           <SidebarNavContent>
             <SidebarWrapper>
 
-              <SidebarNavLink to="/">
+              <SidebarNavLink to="/dashboard">
                 <SidebarNavWrapper>
                   <SidebarNavIcon src={dashboardIcon} alt="Dashboard" />
                   <SidebarNavLabel>Dashboard</SidebarNavLabel>
@@ -224,13 +224,13 @@ const Sidebar = () => {
               </SidebarNavLink>
               {dropDownOne && (
                 <CustomDiv onClick={() => setDropDownOne(!dropDownOne)} flexDirection="column" display="flex">
-                  <DropdownLink to="">
+                  <DropdownLink to="/dashboard/deposit">
                     <SidebarSubMenuLabel>Deposit</SidebarSubMenuLabel>
                   </DropdownLink>
-                  <DropdownLink to="">
+                  <DropdownLink to="/dashboard/withdrawal">
                     <SidebarSubMenuLabel>Withdrawal</SidebarSubMenuLabel>
                   </DropdownLink>
-                  <DropdownLink to="">
+                  <DropdownLink to="/dashboard/transfer">
                     <SidebarSubMenuLabel>Transfer</SidebarSubMenuLabel>
                   </DropdownLink>
                   <DropdownLink to="">
@@ -239,14 +239,14 @@ const Sidebar = () => {
                 </CustomDiv>
               )}
 
-              <SidebarNavLink to="/cards">
+              <SidebarNavLink to="/dashboard/cards">
                 <SidebarNavWrapper>
                   <SidebarNavIcon src={cardIcon} alt="Cards" />
                   <SidebarNavLabel>Cards</SidebarNavLabel>
                 </SidebarNavWrapper>
               </SidebarNavLink>
 
-              <SidebarNavLink to="/loans">
+              <SidebarNavLink to="/dashboard/loans">
                 <SidebarNavWrapper>
                   <SidebarNavIcon src={loanNavIcon} alt="Loans" />
                   <SidebarNavLabel>Loans</SidebarNavLabel>
@@ -271,13 +271,13 @@ const Sidebar = () => {
               </SidebarNavLink>
               {dropDownTwo && (
                  <CustomDiv onClick={() => setDropDownTwo(!dropDownTwo)} flexDirection="column" display="flex" padding="0 0 1rem">
-                 <DropdownLink to="">
-                   <SidebarSubMenuLabel>Chnage Password</SidebarSubMenuLabel>
+                 <DropdownLink to="/dashboard/settings/update-password">
+                   <SidebarSubMenuLabel>Change Password</SidebarSubMenuLabel>
                  </DropdownLink>
-                 <DropdownLink to="">
+                 <DropdownLink to="/dashboard/settings/update-transaction-pin">
                    <SidebarSubMenuLabel>Change Transaction Pin</SidebarSubMenuLabel>
                  </DropdownLink>
-                 <DropdownLink to="">
+                 <DropdownLink to="/dashboard/settings/update-security-questions">
                    <SidebarSubMenuLabel>Security Question</SidebarSubMenuLabel>
                  </DropdownLink>
                </CustomDiv>

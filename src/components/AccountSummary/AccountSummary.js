@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-
+import NumberFormat from 'react-number-format';
 import AccountSummaryChild from "./AccountSummaryChild";
 import TotalAccountBalance from "./TotalAccountBalance";
+import { apiOperation } from "../../utils/config";
 
 export const AccountSummaryContainer = styled.div`
   margin-bottom: 1rem;
@@ -74,21 +75,46 @@ export const SpendTodayBottomText = styled.h4`
 `;
 
 const AccountSummary = () => {
+const [presentSpending, setPresentSpending] = useState('');  
+const getBankAcc = localStorage.getItem("accounts");
+const accounts = JSON.parse(getBankAcc);
+
+const todaySpent = () => {
+  apiOperation.get("/account/today-spend").then((res) => {
+    // console.log("todays spent checker", res.data);
+    if(res.data.success === false) {
+      // console.log(res.data.message ? res.data.message : "");
+    } else {   
+      setPresentSpending(res.data.result.today_spent)
+    }
+});
+}
+
+useEffect(() => todaySpent());
+
   return (
     <>
       <AccountSummaryContainer>
         <AccountSummaryHistoryWrapper>
-          <TotalAccountBalance />
+          <TotalAccountBalance summaryData={accounts} />
           <SpendTodayContainer>
             <SpendTodayTopText>Today Spend</SpendTodayTopText>
-            <SpendTodayBottomText>N500.00</SpendTodayBottomText>
+            <NumberFormat
+            value={presentSpending}
+            displayType="text"
+            thousandSeparator
+            decimalScale={2}
+            fixedDecimalScale
+            prefix={"N"}
+            renderText={(value) =>  <SpendTodayBottomText>{`${value}`}</SpendTodayBottomText>} />
           </SpendTodayContainer>
         </AccountSummaryHistoryWrapper>
         <AccountListWrapper>
-          <AccountSummaryChild />
-          <AccountSummaryChild />
-          <AccountSummaryChild />
-          <AccountSummaryChild />
+          {accounts.map((item,index) => {
+            return (
+              <AccountSummaryChild data={item} index={index} />            
+              )
+          })}
         </AccountListWrapper>
       </AccountSummaryContainer>
     </>

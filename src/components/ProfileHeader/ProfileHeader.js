@@ -67,16 +67,16 @@ export const ContentTopProfileImg = styled.img`
   height: 38px;
 `;
 
-const ProfileHeader = () => {
+const ProfileHeader = ({data}) => {
     return (
         <>
             <ContentTopContainerRTL>
                 <ContentTopContainerBvnNin>
                     <ContentTopContainerBvnNinText>
-                        BNV 0345267383
+                        BNV {data.bvn ? data.bvn : "N/A"}
                     </ContentTopContainerBvnNinText>
                     <ContentTopContainerBvnNinText>
-                        NIN 6949759594
+                        NIN {data.nin ? data.nin : "N/A"}
                     </ContentTopContainerBvnNinText>
                 </ContentTopContainerBvnNin>
                 <ContentTopProfileNotification>

@@ -46,11 +46,11 @@ export const ContentBottomContainer = styled.div`
 `;
 
 export const ContentFormWrapper = styled.div`
-background: linear-gradient(148.41deg, rgba(196, 196, 196, 0.0728) -13.63%, rgba(9, 53, 74, 0.28) 154.42%);
+background: linear-gradient(148.41deg,rgba(196,196,196,0.0728) -13.63%,rgba(9,53,74,0.28) 154.42%);
 backdrop-filter: blur(8px);
 border-radius: 10px;
 padding: 2rem 0;
-width: min(100%, 45rem);
+width: min(100%, 33rem);
 margin-top: 4rem;
 `;
 
@@ -58,18 +58,8 @@ margin-top: 4rem;
 const SettingsPageContent = ({ title, typeUrl }) => {
     return (
         <>
-            <ContentContainer>
-                <ContentTopContainer>
-                    <ContentTopContainerLTR>
-                        <ContentTopContainerPageTitle>
-                            {title}
-                        </ContentTopContainerPageTitle>
-                    </ContentTopContainerLTR>
-                   <ProfileHeader />
-                </ContentTopContainer>
-
-                <ContentBottomContainer>
-                  <OptionCards />
+            <ContentBottomContainer>
+                  {/* <OptionCards /> */}
                     <ContentFormWrapper>
                         {typeUrl === "Pin" && (
                             <UpdatePinForm />
@@ -82,7 +72,6 @@ const SettingsPageContent = ({ title, typeUrl }) => {
                         )}
                     </ContentFormWrapper>
                 </ContentBottomContainer>
-            </ContentContainer>
         </>
     )
 }

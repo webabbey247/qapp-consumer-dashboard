@@ -65,17 +65,7 @@ const LoanPage = ({ title }) => {
     const [stepThree, setStepThree] = useState(false);
     return (
         <>
-            <ContentContainer>
-                <ContentTopContainer>
-                    <ContentTopContainerLTR>
-                        <ContentTopContainerPageTitle>
-                            {title}
-                        </ContentTopContainerPageTitle>
-                    </ContentTopContainerLTR>
-                    <ProfileHeader />
-                </ContentTopContainer>
-
-                <ContentBottomContainer>
+            <ContentBottomContainer>
                     <OptionCards stepOne={stepOne} stepTwo={stepTwo} stepThree={stepThree} />
                     <ContentFormWrapper>
                         {stepOne && (
@@ -92,7 +82,6 @@ const LoanPage = ({ title }) => {
 
                     </ContentFormWrapper>
                 </ContentBottomContainer>
-            </ContentContainer>
         </>
     )
 }

@@ -1,63 +1,68 @@
 import React from "react";
-import axios from "axios";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import axios from "axios";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GlobalStyle } from "./GlobalCss";
 
 // @import Auth Pages
-import { Login, Register, ForgetPassword, NewPassword, MobileBanking} from "./pages/Auth";
+import { Login, Register, ForgetPassword, NewPassword, MobileBanking } from "./pages/Auth";
 
 // @import Dashboard Pages
-import { NoMatch, Homepage, Loan, ChangeQA, ChangePin, ChangePassword, CardGrid, BlockCard, ReplaceCard, RetrieveCardPin } from "./pages";
+import { NoMatch, Homepage, Loan, ChangeQA, ChangePin, ChangePassword, CardGrid, BlockCard, ReplaceCard, RetrieveCardPin, Deposit, Withdrawal, WithdrawalSummary, DepositSummary, Transfer} from "./pages";
 
-// axios.defaults.headers.post["Content-Type"] = "application/json";
-// axios.defaults.headers.post["Accept"] = "application/json";
-axios.defaults.withCredentials = true;
-// axios.defaults.baseURL = "http://qapp-customer-auth.eu-west-1.elasticbeanstalk.com/api/v1/auth";
-axios.defaults.headers.post["Locale"] = { "id": "en", "country": "US", "name": "English - LTR", "direction": "ltr" };
-axios.defaults.headers.post["Bank-ID"] = "f4934971-0352-4bc2-8596-e6ea877cbdaa";
-axios.defaults.headers.post["Platform"] = "WEB";
-axios.interceptors.request.use(function (config) {
-  const token = localStorage.getItem("b_token");
-  config.headers.Authorization = token ? `Bearer ${token}` : "";
-  return config;
-});
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <GlobalStyle />
       <Routes>
+        <Route exact path='/' element={<Login />} />
+        <Route exact path='*' element={<NoMatch />} />
+        <Route exact path='/auth/register' element={<Register />} />
+        <Route exact path='/auth/forget-password' element={<ForgetPassword />} />
+        <Route exact path='/auth/new-password' element={<NewPassword />} />
+        <Route exact path='/auth/activate-online-banking' element={<MobileBanking />} />
 
-        <Route path='/' element={<Login />} />
-        <Route path='/auth/register' element={<Register />} />
-        <Route path='/auth/forget-password' element={<ForgetPassword />} />
-        <Route path='/auth/new-password' element={<NewPassword />} />
-        <Route path='/auth/activate-online-banking' element={<MobileBanking />} />
-        <Route path='*' element={<NoMatch />} />
+        <Route exact path='/dashboard' element={<Homepage />} />
 
-        {/* <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>
-        }
-      /> */}
+        <Route exact path='/dashboard/settings/update-password' element={<ChangePassword />} />
+        <Route exact path='/dashboard/settings/update-transaction-pin' element={<ChangePin />} />
+        <Route exact path='/dashboard/settings/update-security-questions' element={<ChangeQA />} />
 
-        <Route path='/dashboard' element={<Homepage />} />
-        <Route path='/loans' element={<Loan />} />
-        <Route path='/cards' element={<CardGrid />} />
-        <Route path='/cards/retrieve-card-pin' element={<RetrieveCardPin />} />
-        <Route path='/cards/replace-card' element={<ReplaceCard />} />
-        <Route path='/cards/block-card' element={<BlockCard />} />
+        <Route exact path='/dashboard/deposit' element={<Deposit />} />
+        <Route exact path='/dashboard/deposit/summary' element={<DepositSummary />} />
+
+        <Route exact path='/dashboard/withdrawal' element={<Withdrawal />} />
+        <Route exact path='/dashboard/withdrawal/summary' element={<WithdrawalSummary />} />
+
+        <Route exact path='/dashboard/transfer' element={<Transfer />} />
+        {/* <Route exact path='/dashboard/withdrawal/summary' element={<WithdrawalSummary />} /> */}
+
+
+        <Route exact path='/dashboard/loans' element={<Loan />} />
+
+        <Route exact path='/dashboard/cards' element={<CardGrid />} />
+
+        <Route exact path='/dashboard/cards/retrieve-card-pin' element={<RetrieveCardPin />} />
+        <Route exact path='/dashboard/cards/replace-card' element={<ReplaceCard />} />
+        <Route exact path='/dashboard/cards/block-card' element={<BlockCard />} />
+
+        {/* <Route exact path='/loans' element={<Loan />} />
+        <Route exact path='/cards' element={<CardGrid />} />
+      <Route exact path='/settings/update-transaction-pin' element={<ChangePin />} /> */}
+        {/*
+       
+      
+        */}
+        {/* <Route path='/dashboard' element={<Homepage />}/>
+       
         <Route path='/settings' element={<ChangePassword />} />
-        <Route path='/settings/update-password' element={<ChangePassword />} />
+        <Route path='/dashboard/settings/update-password' element={<ChangePassword />} />
         <Route path='/settings/update-transaction-pin' element={<ChangePin />} />
-        <Route path='/settings/update-security-questions' element={<ChangeQA />} />
-        
+        */}
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

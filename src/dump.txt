@@ -1,0 +1,11 @@
+     {/* <FormInput margin="0 .5rem" width="30px" height="40px" type="text" name='codeOne' placeholder="N0.00" {...register("codeOne")}  />
+                            <FormInput margin="0 .5rem" width="30px" height="40px" type="text" name='codeTwo' placeholder="N0.00" {...register("codeTwo")}/>
+                            <FormInput margin="0 .5rem" width="30px" height="40px" type="text" name='codeThree' placeholder="N0.00" {...register("codeThree")} />
+                            <FormInput margin="0 0.5rem" width="30px" height="40px" type="text" name='codeFour' placeholder="N0.00" {...register("codeFour")} /> */}
+                            {/* {error && (
+                                 <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
+                                Kindly input your transaction pin
+                             </GeneralSmText>
+                              )} */}
+
+*Refactor operations cards - Important (pending)

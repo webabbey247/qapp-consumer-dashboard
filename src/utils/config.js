@@ -14,4 +14,17 @@ const apiAuth = axios.create({
 });
 
 
-export { apiAuth};
+const apiOperation = axios.create({
+    baseURL: "http://qapp-customer-account.eu-west-1.elasticbeanstalk.com/api/v1/operation",
+    headers: {
+      "Locale": { "id": "en", "country": "US", "name": "English - LTR", "direction": "ltr" },
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Bank-ID": "f4934971-0352-4bc2-8596-e6ea877cbdaa",
+      "Platform": "WEB",
+      "Authorization": token ? `Bearer ${token}` : ""
+    },
+  });
+
+
+export { apiAuth, apiOperation};
