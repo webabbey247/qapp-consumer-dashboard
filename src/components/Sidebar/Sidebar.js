@@ -233,9 +233,9 @@ const Sidebar = () => {
                   <DropdownLink to="/dashboard/transfer">
                     <SidebarSubMenuLabel>Transfer</SidebarSubMenuLabel>
                   </DropdownLink>
-                  <DropdownLink to="">
+                  {/* <DropdownLink to="">
                     <SidebarSubMenuLabel>Utility</SidebarSubMenuLabel>
-                  </DropdownLink>
+                  </DropdownLink> */}
                 </CustomDiv>
               )}
 
@@ -245,6 +245,15 @@ const Sidebar = () => {
                   <SidebarNavLabel>Cards</SidebarNavLabel>
                 </SidebarNavWrapper>
               </SidebarNavLink>
+
+
+              <SidebarNavLink to="/dashboard/cards">
+                <SidebarNavWrapper>
+                  <SidebarNavIcon src={cardIcon} alt="Utility" />
+                  <SidebarNavLabel>Utility</SidebarNavLabel>
+                </SidebarNavWrapper>
+              </SidebarNavLink>
+
 
               <SidebarNavLink to="/dashboard/loans">
                 <SidebarNavWrapper>

@@ -22,17 +22,6 @@ display:flex;
 justify-content: center;
 `;
 
-export const Option3Card = styled.div`
-flex: 0 0 32.5%;
-max-width: 32.5%;
-width: 100%;
-background: #09354A;
-padding: 0.6rem;
-position:relative;
-display:flex;
-justify-content: center;
-`;
-
 export const OptionCardText = styled.span`
 font-weight: 400;
 font-size: 14px;

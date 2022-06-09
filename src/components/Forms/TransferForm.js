@@ -16,8 +16,9 @@ import {
     BankAccountDropdownList
 } from '../../assets/styles/FormCss';
 import { AuthTopContainer } from '../../assets/styles/AuthCss';
+import swal from 'sweetalert';
 
-const TransferForm = ({setStepTwo}) => {
+const TransferForm = ({ setStepTwo }) => {
     const [loading, setLoading] = useState(false);
     const [toggleBank, setToggleBank] = useState("intra");
     const [accountDropdown, setAccountDropdown] = useState(false);
@@ -32,19 +33,17 @@ const TransferForm = ({setStepTwo}) => {
 
     useEffect(() => {
         async function fetchData() {
-          fetch('https://nigerianbanks.xyz')
-            .then(response => response.json())
-            .then(responseJson => {
-              setBankData(responseJson);
-            })
-            .catch(error => {
-              console.error(error);
-            });
+            fetch('https://nigerianbanks.xyz')
+                .then(response => response.json())
+                .then(responseJson => {
+                    setBankData(responseJson);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
-fetchData();
-}, []);
-
-
+        fetchData();
+    }, []);
 
 
     const validationSchema = yup.object().shape({
@@ -52,10 +51,6 @@ fetchData();
             .string()
             .trim()
             .required("Kindly provide your preferred amount!"),
-        bankAccount: yup
-            .string()
-            .trim()
-            .required("Kindly select your preferred bank account!"),
         recipientAccount: yup
             .string()
             .trim()
@@ -71,24 +66,27 @@ fetchData();
     const transferForm = (data) => {
         setLoading(true);
 
-        const stepOneInfo = {
-             amount: data.amount,
-             description: data.description,
-             accountID:  selectedAccount.accountId ? selectedAccount.accountId : "",
-             beneficiary_name: data.recipientHolder,
-             destination_account: data.recipientAccount,
-             destination_bank: "",
-             Type: "Local",
+        const transferData = {
+            amount: data.amount,
+            description: data.description,
+            accountID: selectedAccount.accountId ? selectedAccount.accountId : "",
+            accountName: selectedAccount.accountName ? selectedAccount.accountName : "",
+            accountNumber: selectedAccount.accountNumber ? selectedAccount.accountNumber : "",
+            beneficiary_name: data.recipientHolder,
+            destination_account: data.recipientAccount,
+            destination_bank: toggleBank === "inter" ? bank ? (`${bank.name}`) : "" : "",
+            transactionType: toggleBank === "inter" ? "inter" : "intra",
         };
 
-        if (stepOneInfo.amount === "" || stepOneInfo.beneficiary_name === "") {
-            console.log(stepOneInfo)
+        if (selectedAccount === "") {
+            swal("Error", "Kindly select preferred funding account", "error");
+        } else if (toggleBank === "inter" &&  bank === ""){
+            swal("Error", "Kindly select recipient account", "error");  
         } else {
-            console.log(stepOneInfo)
-            // setStepTwo(true);
-            // localStorage.setItem("depositData", JSON.stringify(stepOneInfo))
+            setStepTwo(true);
+            localStorage.setItem("depositData", JSON.stringify(transferData))
         }
-        console.log("Tracking transfer form Info", stepOneInfo);
+        console.log("Tracking transfer form Info", transferData);
         setLoading(false);
         reset();
     };
@@ -96,7 +94,7 @@ fetchData();
     return (
         <>
             <ContentForm onSubmit={handleSubmit(transferForm)}>
-            <AuthTopContainer>
+                <AuthTopContainer>
                     <CustomDiv display="flex" flexDirection="column">
                         <GeneralMdText fontWeight="700" fontSize="22px" lineHeight="36px" color="#F7F7F7" textTransform="capitalize" textAlign="center">Deposit</GeneralMdText>
                     </CustomDiv>
@@ -104,7 +102,7 @@ fetchData();
                 <ContentRow>
                     <ContentFullColumn>
                         <FormLabel>Amount</FormLabel>
-                        <FormInput name='amount' type="text" placeholder="" {...register("amount")}  />
+                        <FormInput name='amount' type="text" placeholder="" {...register("amount")} />
 
                         {errors.amount && (
                             <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
@@ -112,97 +110,90 @@ fetchData();
                             </GeneralSmText>)}
                     </ContentFullColumn>
 
-                      <ContentFullColumn>
+                    <ContentFullColumn>
                         <FormLabel>Preferred Bank Account</FormLabel>
                         <FormInput onClick={() => setAccountDropdown(!accountDropdown)} name='bankAccount' type="text" placeholder="Select Account" readOnly {...register("bankAccount")}
-                        value={selectedAccount ? (`${selectedAccount.accountName} (${selectedAccount.accountNumber})`) : ""} />
+                            value={selectedAccount ? (`${selectedAccount.accountName} (${selectedAccount.accountNumber})`) : ""} />
                         <FormInputIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
-                        {accountDropdown  &&  (
+                        {accountDropdown && (
                             <BankAccountDropdown>
-                            {accounts.map((item, index) => {
-                                return (
-                                    <BankAccountDropdownList onClick={() => { 
-                                        setSelectedAccount(item);
-                                        setAccountDropdown(false)
-                                    }} key={index}>
-                                        <CustomDiv display="flex" flexDirection="row" justifyContent="space-between">
-                                            <GeneralSmText color="#F7F7F7" fontWeight="400" textTransform="capitalize"  textAlign="left">{item.accountName} ({item.accountNumber})</GeneralSmText>
-                                            <NumberFormat
-                                                value={item.balance}
-                                                displayType="text"
-                                                thousandSeparator
-                                                decimalScale={2}
-                                                fixedDecimalScale
-                                                prefix={"N"}
-                                                renderText={(value) => <GeneralSmText color="#F7F7F7" fontWeight="400" textTransform="capitalize" textAlign="right">{`${value}`}</GeneralSmText>} />
-                                        </CustomDiv>
-                                    </BankAccountDropdownList>
+                                {accounts.map((item, index) => {
+                                    return (
+                                        <BankAccountDropdownList onClick={() => {
+                                            setSelectedAccount(item);
+                                            setAccountDropdown(false)
+                                        }} key={index}>
+                                            <CustomDiv display="flex" flexDirection="row" justifyContent="space-between">
+                                                <GeneralSmText color="#F7F7F7" fontWeight="400" textTransform="capitalize" textAlign="left">{item.accountName} ({item.accountNumber})</GeneralSmText>
+                                                <NumberFormat
+                                                    value={item.balance}
+                                                    displayType="text"
+                                                    thousandSeparator
+                                                    decimalScale={2}
+                                                    fixedDecimalScale
+                                                    prefix={"N"}
+                                                    renderText={(value) => <GeneralSmText color="#F7F7F7" fontWeight="400" textTransform="capitalize" textAlign="right">{`${value}`}</GeneralSmText>} />
+                                            </CustomDiv>
+                                        </BankAccountDropdownList>
 
-                                )
-                            })}
-                        </BankAccountDropdown>
+                                    )
+                                })}
+                            </BankAccountDropdown>
                         )}
-
-                        {errors.bankAccount && (
-                            <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
-                                {errors.bankAccount.message}
-                            </GeneralSmText>)}
                     </ContentFullColumn>
 
-                    {/* <ContentFullColumn>
+                    <ContentFullColumn>
                         <CustomDiv display="flex" justifyContent="center" flexDirection="column">
-                        <TransferOptionsTabs toggleBank={toggleBank} setToggleBank={setToggleBank} />
+                            <TransferOptionsTabs toggleBank={toggleBank} setToggleBank={setToggleBank} />
                         </CustomDiv>
-                    </ContentFullColumn> */}
+                    </ContentFullColumn>
 
 
                     <ContentFullColumn>
                         <FormLabel>Recipient Account Number</FormLabel>
-                        <FormInput name='recipientAccount' type="text" placeholder="Recipient Account Number" {...register("recipientAccount")} maxLength="10"  />
+                        <FormInput name='recipientAccount' type="text" placeholder="Recipient Account Number" {...register("recipientAccount")} maxLength="10" />
 
                         {errors.recipientAccount && (
                             <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
                                 {errors.recipientAccount.message}
                             </GeneralSmText>)}
                     </ContentFullColumn>
-                    
-                    {/* <ContentFullColumn>
-                        <FormLabel>Recipient Bank</FormLabel>
-                        <FormInput onClick={() => setBankDropdown(!bankDropdown)} name='recipientBank' type="text" placeholder="Select Bank" readOnly {...register("recipientBank")}
-                        value={bank ? (`${bank.name}`) : ""} />
-                        <FormInputIcon onClick={() => setBankDropdown(!bankDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
-                        {bankDropdown  &&  (
-                            <BankAccountDropdown>
-                            {bankData.map((item, index) => {
-                                return (
-                                    <BankAccountDropdownList onClick={() => { 
-                                        setBank(item);
-                                        setBankDropdown(false)
-                                    }} key={index}>
-                                        <CustomDiv display="flex" flexDirection="row" justifyContent="space-between">
-                                            <GeneralSmText color="#F7F7F7" fontWeight="400" textTransform="capitalize"  textAlign="left">{item.name}</GeneralSmText>
-                                        </CustomDiv>
-                                    </BankAccountDropdownList>
 
-                                )
-                            })}
-                        </BankAccountDropdown>
-                        )}
+                    {toggleBank === "inter" && (
+                        <ContentFullColumn>
+                            <FormLabel>Recipient Bank</FormLabel>
+                            <FormInput onClick={() => setBankDropdown(!bankDropdown)} name='recipientBank' type="text" placeholder="Select Bank" readOnly {...register("recipientBank")}
+                                value={bank ? (`${bank.name}`) : ""} />
+                            <FormInputIcon onClick={() => setBankDropdown(!bankDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
+                            {bankDropdown && (
+                                <BankAccountDropdown>
+                                    {bankData.map((item, index) => {
+                                        return (
+                                            <BankAccountDropdownList onClick={() => {
+                                                setBank(item);
+                                                setBankDropdown(false)
+                                            }} key={index}>
+                                                <CustomDiv display="flex" flexDirection="row" justifyContent="space-between">
+                                                    <GeneralSmText color="#F7F7F7" fontWeight="400" textTransform="capitalize" textAlign="left">{item.name}</GeneralSmText>
+                                                </CustomDiv>
+                                            </BankAccountDropdownList>
 
-                        {errors.bankAccount && (
-                            <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
-                                {errors.bankAccount.message}
-                            </GeneralSmText>)}
-                    </ContentFullColumn> */}
+                                        )
+                                    })}
+                                </BankAccountDropdown>
+                            )}
+                        </ContentFullColumn>
+                    )}
+
 
                     <ContentFullColumn>
                         <FormLabel>Recipient Account Holder</FormLabel>
-                        <FormInput name='recipientHolder' type="text" placeholder="Account Holder Name" value="Abiodun Balogun" {...register("recipientHolder")} readOnly  />
+                        <FormInput name='recipientHolder' type="text" placeholder="Account Holder Name" value="Abiodun Balogun" {...register("recipientHolder")} readOnly />
                     </ContentFullColumn>
 
                     <ContentFullColumn>
                         <FormLabel>Description</FormLabel>
-                        <FormInput name='description' type="text" placeholder="" {...register("description")}  />
+                        <FormInput name='description' type="text" placeholder="" {...register("description")} />
                         {errors.description && (
                             <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
                                 {errors.description.message}
@@ -210,10 +201,10 @@ fetchData();
                     </ContentFullColumn>
 
 
-                  
+
                     <ContentFullColumn>
                         <CustomDiv display="flex" flexDirection="row" justifyContent="center" width="100%" margin="1rem 0 0">
-                        <DefaultButton>{loading ? "Loading" : "Continue"}</DefaultButton>
+                            <DefaultButton>{loading ? "Loading" : "Continue"}</DefaultButton>
                         </CustomDiv>
                     </ContentFullColumn>
                 </ContentRow>

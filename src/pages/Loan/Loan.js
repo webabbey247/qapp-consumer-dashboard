@@ -1,11 +1,27 @@
 import React from 'react';
-import LoanPage from '../../components/Content/LoanPage';
 import DashboardLayout from '../../components/Layout/DashboardLayout';
+import LoanContent from '../../components/Content/Loans/LoanContent';
+import { apiLoan } from '../../utils/config';
 
-const Loan = () => {
+const Loan = () => {  
+  const getLoans = () => {
+    apiLoan.get("/loans").then((res) => {
+        if(res.data.success === false) {
+          console.log(res.data ? res.data : "");
+        } else {   
+          localStorage.setItem("loans", JSON.stringify(res.data));
+          console.log("Loan query checker", res.data ? res.data : "");
+        }
+    });
+};
+
+  React.useEffect(() => {
+    getLoans()
+  },[]);
+
   return (
     <DashboardLayout>
-        <LoanPage title="Loans" />
+        <LoanContent title="Loans" />
       </DashboardLayout>
   )
 }

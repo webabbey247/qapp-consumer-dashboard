@@ -1,9 +1,9 @@
-import LoanAccountStatus from "./LoanAccountStatus";
+import LoanEligibilitySummary from "./LoanEligibilitySummary";
 import TransactionSummary from "./TransactionSummary";
 import CardsList from "./CardsList";
 import OperationsSummary from "./OperationsSummary";
 export {
-    LoanAccountStatus,
+    LoanEligibilitySummary,
     TransactionSummary,
     CardsList,
     OperationsSummary

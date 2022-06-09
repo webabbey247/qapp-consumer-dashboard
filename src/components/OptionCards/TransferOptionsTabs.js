@@ -65,40 +65,15 @@ cursor: pointer;
 
 
 const TransferOptionsTabs = ({ toggleBank, setToggleBank }) => {
-    const [interBank, setInterBank] = useState(true);
-    const [intraBank, setIntraBank] = useState(false);
+    const [interBank, setInterBank] = useState("false");
     return (
         <>
             <OptionCardsContainer>
-                {toggleBank ? (
-                    <Option2ActiveCard>
-                        <OptionCardActiveText>To Bank One</OptionCardActiveText>
-                    </Option2ActiveCard>
-                ) : (
-
-                    <Option2Card>
-                        <OptionCardText>To Bank One</OptionCardText>
-                    </Option2Card>
-
-                )}
-
-                {toggleBank ? (
-                    <Option2ActiveCard>
-                        <OptionCardActiveText>To Other Banks</OptionCardActiveText>
-                    </Option2ActiveCard>
-                ) : (
-                    <Option2Card>
-                        <OptionCardText>To Other Banks</OptionCardText>
-                    </Option2Card>
-
-
-
-
-                )}
-                {/* {interBank ? (
+              
+              {interBank ? (
                     <Option2ActiveCard onClick={() => {
                         setInterBank(true)
-                        setIntraBank(false)
+                        setToggleBank("intra")
                     }}>
                     <OptionCardActiveText>To Bank One</OptionCardActiveText>
                     </Option2ActiveCard>
@@ -106,27 +81,27 @@ const TransferOptionsTabs = ({ toggleBank, setToggleBank }) => {
                     <Option2Card 
                     onClick={() => {
                         setInterBank(true)
-                        setIntraBank(false)
+                        setToggleBank("intra")
                     }}>
                         <OptionCardText>To Bank One</OptionCardText>
                     </Option2Card>
                 )}
 
-                {intraBank ? (
+                {!interBank ? (
                     <Option2ActiveCard onClick={() => {
-                        setIntraBank(true)
                         setInterBank(false)
+                        setToggleBank("inter")
                     }}>
                     <OptionCardActiveText>To Other Banks</OptionCardActiveText>
                     </Option2ActiveCard>
                 ) : (
                     <Option2Card onClick={() => {
-                        setIntraBank(true)
                         setInterBank(false)
+                        setToggleBank("inter")
                     }}>
                        <OptionCardText>To Other Banks</OptionCardText>  
                     </Option2Card>
-                )} */}
+                )}
 
 
             </OptionCardsContainer>

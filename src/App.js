@@ -8,7 +8,7 @@ import { GlobalStyle } from "./GlobalCss";
 import { Login, Register, ForgetPassword, NewPassword, MobileBanking } from "./pages/Auth";
 
 // @import Dashboard Pages
-import { NoMatch, Homepage, Loan, ChangeQA, ChangePin, ChangePassword, CardGrid, BlockCard, ReplaceCard, RetrieveCardPin, Deposit, Withdrawal, WithdrawalSummary, DepositSummary, Transfer} from "./pages";
+import { NoMatch, Homepage, Loan, Eligibility, LoanSummary, ChangeQA, ChangePin, ChangePassword, CardGrid, BlockCard, ReplaceCard, RetrieveCardPin, Deposit, Withdrawal, WithdrawalSummary, DepositSummary, Transfer, TransferSummary} from "./pages";
 
 
 
@@ -37,10 +37,12 @@ function App() {
         <Route exact path='/dashboard/withdrawal/summary' element={<WithdrawalSummary />} />
 
         <Route exact path='/dashboard/transfer' element={<Transfer />} />
-        {/* <Route exact path='/dashboard/withdrawal/summary' element={<WithdrawalSummary />} /> */}
+        <Route exact path='/dashboard/transfer/summary' element={<TransferSummary />} />
 
 
         <Route exact path='/dashboard/loans' element={<Loan />} />
+        <Route exact path='/dashboard/loans/eligibility' element={<Eligibility />} />
+        <Route exact path='/dashboard/loans/summary' element={<LoanSummary />} />
 
         <Route exact path='/dashboard/cards' element={<CardGrid />} />
 

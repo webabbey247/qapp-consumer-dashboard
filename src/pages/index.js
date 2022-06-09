@@ -1,8 +1,8 @@
 import Homepage from "./Homepage";
 import NoMatch from "./NoMatch";
 import { ChangeQA, ChangePin, ChangePassword } from "./Settings";
-import Loan from "./Loan/Loan";
-import { Deposit, Withdrawal, WithdrawalSummary, DepositSummary, Transfer } from "./Operations";
+import { Deposit, Withdrawal, WithdrawalSummary, DepositSummary, Transfer, TransferSummary } from "./Operations";
+import { Eligibility, Loan , LoanSummary} from "./Loan";
 
 import {
     CardGrid,
@@ -18,6 +18,8 @@ export {
     ChangePin, 
     ChangePassword,
      Loan, 
+     Eligibility,
+     LoanSummary,
      CardGrid, 
      BlockCard, 
      ReplaceCard, 
@@ -27,4 +29,5 @@ export {
      WithdrawalSummary,
      DepositSummary,
      Transfer,
+     TransferSummary
      };
