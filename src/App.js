@@ -21,8 +21,10 @@ function App() {
         <Route exact path='*' element={<NoMatch />} />
         <Route exact path='/auth/register' element={<Register />} />
         <Route exact path='/auth/forget-password' element={<ForgetPassword />} />
-        <Route exact path='/auth/new-password' element={<NewPassword />} />
+        <Route exact path='/auth/new-password/:token' element={<NewPassword />} />
+
         <Route exact path='/auth/activate-online-banking' element={<MobileBanking />} />
+        <Route exact path='/auth/activate-online-banking/:token' element={<MobileBanking />} />
 
         <Route exact path='/dashboard' element={<Homepage />} />
 

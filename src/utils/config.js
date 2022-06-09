@@ -26,6 +26,17 @@ const apiOperation = axios.create({
     },
   });
 
+  const apiOperationNoToken = axios.create({
+    baseURL: "http://qapp-customer-account.eu-west-1.elasticbeanstalk.com/api/v1/operation",
+    headers: {
+      "Locale": { "id": "en", "country": "US", "name": "English - LTR", "direction": "ltr" },
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Bank-ID": "f4934971-0352-4bc2-8596-e6ea877cbdaa",
+      "Platform": "WEB",
+    },
+  });
+
 
   const apiLoan = axios.create({
     baseURL: "http://qapp-customer-loan.eu-west-1.elasticbeanstalk.com/api/v1/loan",
@@ -39,5 +50,4 @@ const apiOperation = axios.create({
     },
   });
 
-
-export { apiAuth, apiOperation, apiLoan};
+export { apiAuth, apiOperation, apiLoan, apiOperationNoToken};

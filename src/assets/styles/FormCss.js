@@ -65,7 +65,7 @@ justify-content: flex-start;
 export const DialingCodeInput = styled.div`
   background: #032130;
   border: 1px solid #032130;
-  height: 56px;
+  height: 48px;
   margin-bottom: 1rem;
   margin-right: 5px;
   border-radius: 5px;
@@ -168,7 +168,8 @@ margin: 0px;
 padding: 0px;
 position: absolute;
 right: 5%;
-top: 43%;
+top: 13%;
+font-size: 12px;
 `;
 
 export const BankAccountDropdown = styled.ul`

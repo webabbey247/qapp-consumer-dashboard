@@ -23,7 +23,7 @@ mobile Banking</GeneralSmText>
                             </CustomDiv>
                         </AuthTopContainer>
                         <AuthBottomContainer>
-                            <MobileBankingForm />
+                                  <MobileBankingForm />
                         </AuthBottomContainer>
                     </AuthContainer>
                 </AuthSection>

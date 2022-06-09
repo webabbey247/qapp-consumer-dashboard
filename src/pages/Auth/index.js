@@ -9,5 +9,5 @@ export {
     Register,
     ForgetPassword,
     NewPassword,
-    MobileBanking
+    MobileBanking,
 }

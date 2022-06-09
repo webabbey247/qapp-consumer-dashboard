@@ -14,6 +14,7 @@ import DepositForm from "./DepositForm";
 import WithdrawalForm from "./WithdrawalForm";
 import TransferForm from "./TransferForm";
 
+
 export {
     UpdatePasswordForm,
      UpdatePinForm, 
@@ -29,5 +30,5 @@ export {
      MobileBankingForm,
      DepositForm,
      WithdrawalForm,
-     TransferForm
+     TransferForm,
 }

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import swal from "sweetalert";
-import { apiOperation, apiAuth } from '../../utils/config';
+import { apiAuth } from '../../utils/config';
 
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, GeneralSmText } from '../../GlobalCss';
 import {
@@ -17,7 +17,6 @@ const ForgetPasswordForm = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [stepTwo, setStepTwo] = useState(false);
-    const [token, setToken] = useState('');
 
     const validationSchema = yup.object().shape({
         accountNumber: yup
@@ -71,18 +70,22 @@ const ForgetPasswordForm = () => {
         };
 
         apiAuth.post("/password/forgot-password", userInfo).then((res) => {
-            console.log("Forget password form checker", res.data)
-            if (res.data.success === false) {
+            // console.log("Forget password form checker", res.data)
+           if (res.data.success === false) {
                 swal("Error", res.data.message, "error");
                 console.log(res.data.message ? res.data.message : "")
             } else {
                 if (stepTwo) {
-                    console.log("step two form result", res.data.message ? res.data.message : "")
-                    // swal("Success", res.data.message, "success");
+                    console.log("step two form result", res.data.result ? res.data.result : "")
+                    setTimeout(() => {
+                        localStorage.setItem("resetPassDump", JSON.stringify(userInfo))
+                        navigate(`/auth/new-password/${res.data.result.token}`);
+                      }, 1000)
                 } else {
-                    setStepTwo(true)
                     swal("Success", res.data.message, "success");
-                    console.log("step one form result", res.data.message ? res.data.message : "")
+                    setStepTwo(true)
+                    console.log("step one token result", res.data.result ? res.data.result : "")
+                    // console.log("step one form result", res.data.result ? res.data.result : "")
                 }
             }
         });
