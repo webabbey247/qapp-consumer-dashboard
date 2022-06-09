@@ -4,16 +4,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import swal from "sweetalert";
+import { Eye, EyeOff } from 'react-feather';
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, CustomRouterLink, GeneralSmText } from '../../GlobalCss';
 import {
     ContentForm,
-    FormInput
+    FormInput,
+    FormInputIcon
 } from '../../assets/styles/FormCss';
 import { apiAuth } from '../../utils/config';
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const validationSchema = yup.object().shape({
         accountNumber: yup
@@ -44,9 +48,10 @@ const LoginForm = () => {
         };
 
         apiAuth.post("/login", userInfo).then((res) => {
-            // console.log("Login form checker", res.data)
+            console.log("Login form checker", res.data)
             if(res.data.success ===  false){
                 console.log(res.data.message ? res.data.message : "")
+                swal("Error", res.data.message, "error");
             } else {
                 localStorage.setItem("b_token", res.data.result.jwt);
                  localStorage.setItem("b_user", JSON.stringify(res.data.result));
@@ -76,13 +81,20 @@ const LoginForm = () => {
                          )}
                     </ContentFullColumn>
 
+                   
                     <ContentFullColumn>
-                        <FormInput name='passcode' type="password" placeholder="Password" maxLength={8} {...register("passcode")} />
-                        {errors.passcode && (
-                             <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
-                            {errors.passcode.message}
-                         </GeneralSmText>)}
-                    </ContentFullColumn>
+                            <FormInput name="passcode" type={showPassword ? "text" : "password"} placeholder="Passcode" {...register("passcode")} maxLength={8} />
+                            <FormInputIcon onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ?  <Eye fontSize="10px" color='#FC7620' /> :   <EyeOff fontSize="10px" color='#1A4153' />}
+                                </FormInputIcon>
+                            {errors.passcode && (
+                                <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
+                                    {errors.passcode.message}
+                                </GeneralSmText>
+                            )}
+                        </ContentFullColumn>
+
+
                     <ContentFullColumn>
                         <CustomDiv display="flex" flexDirection="row" justifyContent="flex-end" width="100%">
                             <CustomRouterLink to='/auth/forget-password' fontWeight="400" fontSize="12.5px" lineHeight="16px" color='#f7f7f7' textDecoration="none" margin="0 0 1rem" textAlign="right">Forgot Password?</CustomRouterLink>
