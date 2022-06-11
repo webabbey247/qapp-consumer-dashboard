@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import swal from "sweetalert";
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 import { Eye, EyeOff } from 'react-feather';
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, CustomRouterLink, GeneralSmText } from '../../GlobalCss';
 import {
@@ -52,15 +52,14 @@ const LoginForm = () => {
             console.log("Login form checker", res.data)
             if(res.data.success ===  false){
                 console.log(res.data.message ? res.data.message : "")
-                toast.error(res.data.message);
-                // swal("Error", res.data.message, "error");
+                swal("Error", res.data.message, "error");
             } else {
                 localStorage.setItem("b_token", res.data.result.jwt);
                  localStorage.setItem("b_user", JSON.stringify(res.data.result));
                  setTimeout(() => {
                     navigate("/dashboard");
-                    toast.success("You have successfully logged in");
-                    // swal("Success", "You have successfully logged in", "success");
+                    // toast.success("You have successfully logged in");
+                    swal("Success", "You have successfully logged in", "success");
                   }, 1000)
                 // console.log("JWT token checker", res.data.result.jwt);
                 // console.log("Payload checker", res.data.result);

@@ -168,7 +168,7 @@ margin: 0px;
 padding: 0px;
 position: absolute;
 right: 5%;
-top: 13%;
+top: 45%;
 font-size: 12px;
 `;
 

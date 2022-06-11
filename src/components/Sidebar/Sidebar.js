@@ -13,8 +13,8 @@ flex-direction: column;
 flex: 1 0 auto;
 top: 0;
 width: 280px;
-min-width: 280px;
-max-width: 280px;
+min-width: 250px;
+max-width: 250px;
 height: 100vh;
 min-height: 100vh;
 max-height: 100vh;
@@ -47,7 +47,7 @@ display: flex;
 align-items: center;
 width: 100%;
 padding-left: 1.5rem;
-box-shadow: 0 0 10px rgba(0, 0, 0, .35);
+// box-shadow: 0 0 10px rgba(0, 0, 0, .35);
 `;
 
 const SidebarNavContent = styled.div`
@@ -95,7 +95,7 @@ const SidebarFooterTop = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  padding: 0 1rem 0.5rem;
+  padding: 0 0.5rem 1rem;
 `;
 
 const SidebarFooterBtn = styled.button`
