@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import swal from "sweetalert";
+// import { toast } from 'react-toastify';
 import { ContentRow, ContentFullColumn, CustomDiv, GeneralMdText, DefaultButton, GeneralSmText } from '../../GlobalCss';
 import {
     ContentForm,

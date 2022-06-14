@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import swal from 'sweetalert';
 import NumberFormat from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
 import { ContentRow, ContentFullColumn, DefaultButton, GeneralMdText, GeneralSmText, CustomDiv } from '../../GlobalCss';
@@ -41,8 +41,7 @@ const LoanEligibilitySummary = ({ eligibleData, setStepTwo, setStepThree }) => {
     const { register, handleSubmit } = useForm();
     const loanForm = () => {
         if(preferredAccount === ''){
-            swal("Error", "Kindly select preferred account required for processing the loan", "error");
-            // console.log("error with card")
+            toast.error("Kindly select preferred account required for processing the loan");
         } else {
         const savedData = JSON.parse(localStorage.getItem('savedData'));
         savedData["account_id"] = preferredAccount.accountId ? preferredAccount.accountId : "";

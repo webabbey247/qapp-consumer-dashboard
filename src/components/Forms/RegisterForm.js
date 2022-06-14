@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import swal from "sweetalert";
+import { toast } from 'react-toastify';
 import {CgChevronDownR} from "react-icons/cg";
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, GeneralSmText, CustomRouterLink } from '../../GlobalCss';
 import {
@@ -107,17 +107,15 @@ const RegisterForm = () => {
         apiOperation.post("/account/create", formData).then((res) => {
             // console.log("Register form checker", res.data)
             if(res.data.success ===  false){
+              toast.error(res.data.message ? res.data.message : "");
                 console.log(res.data.message ? res.data.message : "")
             } else {
+              toast.success(res.data.message ? res.data.message : "");
                  setTimeout(() => {
                     navigate("/auth/activate-online-banking");
                   }, 1000)
-                  swal("Success", "You have successfully registered an account", "success");
-
-                // console.log("Payload checker", res.data.result);
             }
         });
-        // console.log("Tracking Register Info", formData);
         setLoading(false);
         reset();
     };
@@ -184,15 +182,7 @@ const RegisterForm = () => {
             ) : (
               ""
             )}
-                                {/* <FlagContainer style={{
-                                    width: "100%",
-                                    height: "56px",
-                                    borderTopRightRadius: 0,
-                                    borderBottomRightRadius: 0,
-
-                                }}>
-                                    <FlagImg src={dummyFlag} />
-                                </FlagContainer> */}
+                               
                             </CustomDiv>
 
                             <CustomDiv maxWidth="80%" flex="0 0 80%">

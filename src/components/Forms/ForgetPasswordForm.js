@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import swal from "sweetalert";
 import { apiAuth } from '../../utils/config';
 
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, GeneralSmText } from '../../GlobalCss';
@@ -72,7 +72,7 @@ const ForgetPasswordForm = () => {
         apiAuth.post("/password/forgot-password", userInfo).then((res) => {
             // console.log("Forget password form checker", res.data)
            if (res.data.success === false) {
-                swal("Error", res.data.message, "error");
+            toast.error(res.data.message ? res.data.message : "");
                 console.log(res.data.message ? res.data.message : "")
             } else {
                 if (stepTwo) {
@@ -82,10 +82,9 @@ const ForgetPasswordForm = () => {
                         navigate(`/auth/new-password/${res.data.result.token}`);
                       }, 1000)
                 } else {
-                    swal("Success", res.data.message, "success");
+                    toast.success(res.data.message ? res.data.message : "");
                     setStepTwo(true)
                     console.log("step one token result", res.data.result ? res.data.result : "")
-                    // console.log("step one form result", res.data.result ? res.data.result : "")
                 }
             }
         });

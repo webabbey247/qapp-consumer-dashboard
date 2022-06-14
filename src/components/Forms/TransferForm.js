@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaChevronCircleDown } from 'react-icons/fa';
 import NumberFormat from 'react-number-format';
 import { TransferOptionsTabs } from '../OptionCards';
-// import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -16,7 +16,6 @@ import {
     BankAccountDropdownList
 } from '../../assets/styles/FormCss';
 import { AuthTopContainer } from '../../assets/styles/AuthCss';
-import swal from 'sweetalert';
 
 const TransferForm = ({ setStepTwo }) => {
     const [loading, setLoading] = useState(false);
@@ -79,9 +78,9 @@ const TransferForm = ({ setStepTwo }) => {
         };
 
         if (selectedAccount === "") {
-            swal("Error", "Kindly select preferred funding account", "error");
+            toast.error("Kindly select preferred funding account");
         } else if (toggleBank === "inter" &&  bank === ""){
-            swal("Error", "Kindly select recipient account", "error");  
+            toast.error("Kindly select recipient account");
         } else {
             setStepTwo(true);
             localStorage.setItem("depositData", JSON.stringify(transferData))

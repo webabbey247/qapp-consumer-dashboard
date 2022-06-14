@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import { FaChevronCircleDown } from 'react-icons/fa';
-import swal from "sweetalert";
+import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -12,9 +12,9 @@ import {
     ContentForm,
     FormLabel,
     FormInput,
-    FormInputIcon,
     BankAccountDropdown,
-    BankAccountDropdownList
+    BankAccountDropdownList,
+    FormInputDropdownIcon
 } from '../../assets/styles/FormCss';
 import { TenureData } from '../../data/DummyData';
 
@@ -67,19 +67,16 @@ const LoanOptionsForm = ({ setStepTwo, loanData }) => {
             tenor: selectedTenure ? (`${selectedTenure.value}`) : ""
         };
 
-        
-
         if (stepOneData.interestRate === "") {
             console.log(stepOneData.interestRate);
-            swal("Error", "Kindly select your preferred loan", "error");
+            toast.error("Kindly select your preferred loan tenure");
         } else if (stepOneData.tenor === "") {
-            swal("Error", "Kindly select your preferred loan tenure", "error");
+            toast.error("Kindly select your preferred loan tenure");
         } else {
             apiLoan.post("/calculate-monthly-repayment", stepOneData).then((res) => {
                 if (res.data === "" || res.data === undefined || res.data == null) {
-                    swal("Error", "Something went wrong! Kindly confirm your inputs and try again", "error");
+                    toast.error("Something went wrong! Kindly confirm your inputs and try again");
                 } else {
-
                     const savedData = {
                         amount: data.amount,
                         tenor_in_months: selectedTenure ? (`${selectedTenure.value}`) : "",
@@ -107,7 +104,7 @@ const LoanOptionsForm = ({ setStepTwo, loanData }) => {
                         <FormLabel>Select Loan</FormLabel>
                         <FormInput onClick={() => setLoanDropdown(!loanDropdown)} name='loanType' type="text" placeholder="Select Loan" readOnly {...register("loanType")}
                             value={selectedLoan ? (`${selectedLoan.title}`) : ""} />
-                        <FormInputIcon onClick={() => setLoanDropdown(!loanDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
+                        <FormInputDropdownIcon onClick={() => setLoanDropdown(!loanDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputDropdownIcon>
                         {loanDropdown && (
                             <BankAccountDropdown>
                                 {loanData.map((item, index) => {

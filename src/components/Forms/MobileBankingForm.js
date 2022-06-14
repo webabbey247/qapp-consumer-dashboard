@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import swal from "sweetalert";
+import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'react-feather';
 import { apiOperationNoToken } from '../../utils/config';
 
@@ -57,7 +57,7 @@ const MobileBankingForm = () => {
             apiOperationNoToken.post("/account/activate-int-banking", userInfo).then((res) => {
                 // console.log("Enrol for banking without token", res.data)
                if (res.data.success === false) {
-                    swal("Error", res.data.message, "error");
+                toast.error(res.data.message ? res.data.message : "");
                     console.log(res.data.message ? res.data.message : "")
                 } else {
                     setTimeout(() => {
@@ -70,11 +70,11 @@ const MobileBankingForm = () => {
             apiOperationNoToken.post(`/account/activate-int-banking/${token}`, userInfo).then((res) => {
                 console.log("Enrol for banking", res.data)
                if (res.data.success === false) {
-                    swal("Error", res.data.message, "error");
+                toast.error(res.data.message ? res.data.message : "");
                     console.log(res.data.message ? res.data.message : "")
                 } else {
                     setTimeout(() => {
-                        swal("Success", res.data.message ? res.data.message : "", "success");
+                        toast.success(res.data.message ? res.data.message : "");
                         // console.log("step two form result", res.data)
                         navigate("/");
                       }, 1000)

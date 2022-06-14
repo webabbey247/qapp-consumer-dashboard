@@ -11,6 +11,8 @@ import {
     RetrieveCardPin
 } from "./Cards";
 
+import TransactionsList from "./Transactions/TransactionsList";
+
 export {
     Homepage, 
     NoMatch, 
@@ -29,5 +31,6 @@ export {
      WithdrawalSummary,
      DepositSummary,
      Transfer,
-     TransferSummary
+     TransferSummary,
+     TransactionsList
      };

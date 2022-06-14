@@ -28,6 +28,7 @@ const dummyBankThree = require("./images/first-bank-logo.png");
 const cardIcon = require("./images/cc-icon.png");
 const loanNavIcon = require("./images/money-icon.png");
 const dummyFlag = require("./images/icons/dummyFlag.png");
+const closeIcon = require("./images/icons/close-icon.png");
 
 
 export {
@@ -60,5 +61,6 @@ export {
   menuDropRightIcon,
   dummyBankOne,
   dummyBankTwo,
-  dummyBankThree
+  dummyBankThree,
+  closeIcon
 };

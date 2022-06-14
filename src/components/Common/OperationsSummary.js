@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import NumberFormat from 'react-number-format';
-import swal from 'sweetalert';
+import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -90,7 +90,7 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
             apiOperation.post("/withdrawal", stepTwoInfo).then((res) => {
                 console.log("withdrawal form response checker", res.data)
                 if (res.data.success === false) {
-                    swal("Error", res.data.message ? res.data.message : "", "error");
+                    toast.error(res.data.message);
                     console.log(res.data.message ? res.data.message : "")
                 } else {
                     localStorage.setItem("operation", JSON.stringify(res.data.result))
@@ -104,7 +104,7 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
             apiOperation.post("/deposit", stepTwoInfo).then((res) => {
                 console.log("deposit form response checker", res.data)
                 if (res.data.success === false) {
-                    swal("Error", res.data.message ? res.data.message : "", "error");
+                    toast.error(res.data.message);
                     console.log(res.data.message ? res.data.message : "")
                 } else {
                     localStorage.setItem("operation", JSON.stringify(res.data.result))
@@ -120,10 +120,10 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
                     // console.log("intra transfer response", res.data);
                     // console.log("deposit form response checker", res.data)
                     if (res.data.success === false) {
-                        swal("Error", res.data.message ? res.data.message : "", "error");
+                        toast.error(res.data.message );
                         console.log(res.data.message ? res.data.message : "")
                     } else {
-                        swal("Success", res.data.message ? res.data.message : "", "success");
+                        toast.success(res.data.message);
                         localStorage.setItem("operation", JSON.stringify(res.data.result))
                         setTimeout(() => {
                             navigate("/dashboard/transfer/summary");
@@ -137,10 +137,10 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
                     // console.log("inter transfer response", res.data);
                     // console.log("deposit form response checker", res.data)
                     if (res.data.success === false) {
-                        swal("Error", res.data.message ? res.data.message : "", "error");
+                        toast.error(res.data.message );
                         console.log(res.data.message ? res.data.message : "")
                     } else {
-                        swal("Success", res.data.message ? res.data.message : "", "success");
+                        toast.success(res.data.message);
                         localStorage.setItem("operation", JSON.stringify(res.data.result))
                         setTimeout(() => {
                             navigate("/dashboard/transfer/summary");
@@ -153,10 +153,10 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
                 console.log("apply form Info", loanData);
                 // console.log("deposit form response checker", res.data)
                 if (res.data.success === false) {
-                    swal("Error", res.data.message ? res.data.message : "", "error");
+                    toast.error(res.data.message);
                     console.log(res.data.message ? res.data.message : "")
                 } else {
-                    swal("Success", res.data.message ? res.data.message : "", "success");
+                    toast.success(res.data.message);
                     setTimeout(() => {
                         navigate("/dashboard/loans/summary");
                     }, 1000)
@@ -352,7 +352,7 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
                     <ContentFullColumn>
                         <OTPFormContainer onSubmit={handleSubmit(verifyOTPForm)}>
                             <CustomDiv display="flex" flexDirection="row" justifyContent="center" width="100%">
-                                <FormInput name='otp' textAlign="center" width="100px" type="text" placeholder="OTP" {...register("otp")} maxLength={4} />
+                                <FormInput name='otp' textAlign="center" width="100px" type="text" placeholder="PIN" {...register("otp")} maxLength={4} />
                             </CustomDiv>
 
                             <CustomDiv display="flex" flexDirection="row" justifyContent="center" margin="0.5rem 0">

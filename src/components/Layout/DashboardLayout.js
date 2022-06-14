@@ -8,17 +8,17 @@ export const SiteWrapper = styled.main`
   padding: 0;
   display: flex;
   flex-direction: row;
-  background: #063043;
+  background: #1A3C4A;
 `;
 
-
 export const ContentContainer = styled.div`
-  flex: 0 0 80%;
-  max-width: 80;
-  background: #063043;
-  backdrop-filter: blur(26px);
+  // flex: 0 0 80%;
+  // max-width: 80;
+  background: #1A3C4A;
+  width: max(100% - 250px);
+max-width: 100%;
   height: 100%;
-  padding: 0 2rem;
+  padding: 0 1rem;
 `;
 
 export const ContentTopContainer = styled.div`
@@ -81,7 +81,7 @@ export const TransactionHistoryContainer = styled.div`
 const DashboardLayout = ({children}) => {
   const userData = localStorage.getItem("b_user");
   const bioData = JSON.parse(userData);
-  console.log("use info checker", bioData);
+  // console.log("use info checker", bioData);
   return (
     <>
       <SiteWrapper>

@@ -111,15 +111,3 @@ const LoginForm = () => {
     )
 }
 export default LoginForm
-
-
-// "dotenv": "^10.0.0",
-// "react": "^17.0.2",
-// "react-dom": "^17.0.2",
-// "react-feather": "^2.0.9",
-// "react-hook-form": "^7.18.0",
-// "react-hot-toast": "^2.1.1",
-// "react-popper": "^2.2.5",
-// "react-router-dom": "^5.3.0",
-// "react-scripts": "4.0.3",
-// "sweetalert": "^2.1.2",

@@ -168,6 +168,21 @@ margin: 0px;
 padding: 0px;
 position: absolute;
 right: 5%;
+top: 20%;
+font-size: 12px;
+`;
+
+export const FormInputDropdownIcon = styled.div`
+display: flex;
+flex-direction: row;
+-moz-box-pack: center;
+justify-content: center;
+-moz-box-align: center;
+align-items: center;
+margin: 0px;
+padding: 0px;
+position: absolute;
+right: 5%;
 top: 45%;
 font-size: 12px;
 `;

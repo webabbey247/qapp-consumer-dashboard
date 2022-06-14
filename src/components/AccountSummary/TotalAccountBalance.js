@@ -49,9 +49,10 @@ export const TotalAccountBalanceBottomText = styled.p`
   mix-blend-mode: normal;
   opacity: 0.8;
   margin-top: 0.5rem;
+  cursor: pointer;
 `;
 
-const TotalAccountBalance = ({ summaryData }) => {
+const TotalAccountBalance = ({ summaryData, setAccountModal }) => {
   // console.log("this is my summmary check", summaryData)
   const totalBalance = summaryData.map(account => account.balance).reduce((a, b) => a + b)
   const totalAccount = summaryData.length;
@@ -69,10 +70,11 @@ const TotalAccountBalance = ({ summaryData }) => {
             fixedDecimalScale
             prefix={"N"}
             renderText={(value) => <TotalAccountBalanceMiddleText>{`${value}`}</TotalAccountBalanceMiddleText>} />
-          <TotalAccountBalanceBottomText>
+          <TotalAccountBalanceBottomText onClick={() => setAccountModal(true)}>
             {totalAccount}  {totalAccount <= 1 ? "Account" : "Accounts"}
           </TotalAccountBalanceBottomText>
         </TotalAccountBalanceWrapper>
+
       </TotalAccountBalanceContainer>
     </>
   );

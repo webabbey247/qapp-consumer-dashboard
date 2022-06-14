@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import swal from "sweetalert";
+import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'react-feather';
 import { apiAuth } from '../../utils/config';
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, GeneralSmText } from '../../GlobalCss';
@@ -59,10 +59,10 @@ const NewPasswordForm = () => {
         apiAuth.post(`/password/reset-password/${token}`, userInfo).then((res) => {
             // console.log("new password form checker", res.data)
            if (res.data.success === false) {
-                swal("Error", res.data.message, "error");
+            toast.error(res.data.message ? res.data.message : "");
                 console.log(res.data.message ? res.data.message : "")
             } else {
-                    swal("Success", res.data.message, "success");
+                toast.success(res.data.message ? res.data.message : "");
                     localStorage.removeItem("resetPassDump")
                     navigate('/');
             }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import { Eye, EyeOff } from 'react-feather';
 import { FaChevronCircleDown } from 'react-icons/fa';
 import NumberFormat from 'react-number-format';
+import { toast } from 'react-toastify';
 // import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,9 +12,9 @@ import {
     ContentForm,
     FormLabel,
     FormInput,
-    FormInputIcon,
     BankAccountDropdown,
-    BankAccountDropdownList
+    BankAccountDropdownList,
+    FormInputDropdownIcon
 } from '../../assets/styles/FormCss';
 import { AuthTopContainer } from '../../assets/styles/AuthCss';
 
@@ -23,7 +24,6 @@ const DepositForm = ({setStepTwo}) => {
     const [selectedAccount, setSelectedAccount] = useState('');
     const data = localStorage.getItem("accounts");
     const accounts = JSON.parse(data);
-    // console.log("account dropdown checker", accounts);
 
 
     const validationSchema = yup.object().shape({
@@ -31,10 +31,6 @@ const DepositForm = ({setStepTwo}) => {
             .string()
             .trim()
             .required("Kindly provide your preferred amount!"),
-        bankAccount: yup
-            .string()
-            .trim()
-            .required("Kindly select your preferred bank account!"),
     });
 
     const { register, handleSubmit, reset, formState } = useForm({
@@ -55,6 +51,7 @@ const DepositForm = ({setStepTwo}) => {
         };
 
         if (stepOneInfo.amount === "" || stepOneInfo.bankAccount === "") {
+            toast.error("Kindly select your funding account...");
             console.log(stepOneInfo)
         } else {
             setStepTwo(true);
@@ -77,7 +74,6 @@ const DepositForm = ({setStepTwo}) => {
                     <ContentFullColumn>
                         <FormLabel>Amount</FormLabel>
                         <FormInput name='amount' type="text" placeholder="" {...register("amount")}  />
-
                         {errors.amount && (
                             <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
                                 {errors.amount.message}
@@ -88,7 +84,7 @@ const DepositForm = ({setStepTwo}) => {
                         <FormLabel>Preferred Bank Account</FormLabel>
                         <FormInput onClick={() => setAccountDropdown(!accountDropdown)} name='bankAccount' type="text" placeholder="Select bank" readOnly {...register("bankAccount")}
                         value={selectedAccount ? (`${selectedAccount.accountName} (${selectedAccount.accountNumber})`) : ""} />
-                        <FormInputIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
+                        <FormInputDropdownIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputDropdownIcon>
                         {accountDropdown  &&  (
                             <BankAccountDropdown>
                             {accounts.map((item, index) => {
@@ -109,7 +105,6 @@ const DepositForm = ({setStepTwo}) => {
                                                 renderText={(value) => <GeneralSmText color="#F7F7F7" fontWeight="400" textTransform="capitalize" textAlign="right">{`${value}`}</GeneralSmText>} />
                                         </CustomDiv>
                                     </BankAccountDropdownList>
-
                                 )
                             })}
                         </BankAccountDropdown>

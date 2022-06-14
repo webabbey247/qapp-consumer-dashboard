@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import swal from "sweetalert";
-// import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'react-feather';
 import { ContentRow, ContentFullColumn, CustomDiv, DefaultButton, CustomRouterLink, GeneralSmText } from '../../GlobalCss';
 import {
@@ -52,17 +51,15 @@ const LoginForm = () => {
             console.log("Login form checker", res.data)
             if(res.data.success ===  false){
                 console.log(res.data.message ? res.data.message : "")
-                swal("Error", res.data.message, "error");
+                toast.error(res.data.message);
             } else {
                 localStorage.setItem("b_token", res.data.result.jwt);
                  localStorage.setItem("b_user", JSON.stringify(res.data.result));
+                 console.log("Tracking Login Info", res.data.result);
                  setTimeout(() => {
                     navigate("/dashboard");
-                    // toast.success("You have successfully logged in");
-                    swal("Success", "You have successfully logged in", "success");
+                    toast.success("You have successfully logged in");
                   }, 1000)
-                // console.log("JWT token checker", res.data.result.jwt);
-                // console.log("Payload checker", res.data.result);
             }
         });
         console.log("Tracking Login Info", userInfo);
@@ -85,10 +82,12 @@ const LoginForm = () => {
 
                    
                     <ContentFullColumn>
-                            <FormInput name="passcode" type={showPassword ? "text" : "password"} placeholder="Passcode" {...register("passcode")} maxLength={8} />
+                           <CustomDiv position="relative">
+                           <FormInput name="passcode" type={showPassword ? "text" : "password"} placeholder="Passcode" {...register("passcode")} maxLength={8} />
                             <FormInputIcon onClick={() => setShowPassword(!showPassword)}>
                             {showPassword ?  <Eye fontSize="10px" color='#FC7620' /> :   <EyeOff fontSize="10px" color='#1A4153' />}
                                 </FormInputIcon>
+                           </CustomDiv>
                             {errors.passcode && (
                                 <GeneralSmText fontWeight="400" fontSize="13px" lineHeight="19px" color="#FC7620" textTransform="unset" opacity="0.8" textAlign="left" margin="-10px 0 20px">
                                     {errors.passcode.message}
