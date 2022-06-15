@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import NumberFormat from 'react-number-format';
+import { isEmpty } from "lodash";
 
 
 export const TotalAccountBalanceContainer = styled.div`
@@ -53,8 +54,8 @@ export const TotalAccountBalanceBottomText = styled.p`
 `;
 
 const TotalAccountBalance = ({ summaryData, setAccountModal }) => {
-  // console.log("this is my summmary check", summaryData)
-  const totalBalance = summaryData.map(account => account.balance).reduce((a, b) => a + b)
+  console.log("summary data checker", summaryData);
+  const totalBalance = (!isEmpty(summaryData) && summaryData.map(account => account.balance).reduce((a, b) => a + b))
   const totalAccount = summaryData.length;
 
   return (

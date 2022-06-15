@@ -17,6 +17,8 @@ import {
     FormInputDropdownIcon
 } from '../../assets/styles/FormCss';
 import { TenureData } from '../../data/DummyData';
+import { isEmpty } from 'lodash';
+
 
 export const ContentButtonWrapper = styled.div`
 padding: 1rem 0;
@@ -107,7 +109,7 @@ const LoanOptionsForm = ({ setStepTwo, loanData }) => {
                         <FormInputDropdownIcon onClick={() => setLoanDropdown(!loanDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputDropdownIcon>
                         {loanDropdown && (
                             <BankAccountDropdown>
-                                {loanData.map((item, index) => {
+                                {(!isEmpty(loanData)) && loanData.map((item, index) => {
                                     return (
                                         <BankAccountDropdownList onClick={() => {
                                             setSelectedLoan(item);
@@ -150,7 +152,7 @@ const LoanOptionsForm = ({ setStepTwo, loanData }) => {
                         <FormInput onClick={() => setTenureDropdown(!tenureDropdown)} type="text" name='tenure' placeholder="Select Loan" {...register("tenure")} readOnly value={selectedTenure ? (`${selectedTenure.value}`) : ""} />
                         {tenureDropdown && (
                             <BankAccountDropdown>
-                                {TenureData.map((item, index) => {
+                                {(!isEmpty(TenureData)) && TenureData.map((item, index) => {
                                     return (
                                         <BankAccountDropdownList onClick={() => {
                                             setSelectedTenure(item);

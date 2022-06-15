@@ -46,7 +46,7 @@ padding: 1rem 0;
 margin: 1rem 0;
 `;
 
-const DepositContent = () => {
+const DepositContent = ({data}) => {
   const [stepTwo, setStepTwo] = useState(false);
   return (
     <>
@@ -56,7 +56,7 @@ const DepositContent = () => {
           {stepTwo ? (
             <OperationsSummary typeUrl="deposit" setStepTwo={setStepTwo} />
           ) : (
-            <DepositForm setStepTwo={setStepTwo} />
+            <DepositForm accounts={data} setStepTwo={setStepTwo} />
           )}
         </ContentFormWrapper>
       </ContentBottomContainer>

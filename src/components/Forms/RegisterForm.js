@@ -110,10 +110,11 @@ const RegisterForm = () => {
               toast.error(res.data.message ? res.data.message : "");
                 console.log(res.data.message ? res.data.message : "")
             } else {
-              toast.success(res.data.message ? res.data.message : "");
-                 setTimeout(() => {
-                    navigate("/auth/activate-online-banking");
-                  }, 1000)
+              console.log("register response", res.data);
+              // toast.success(res.data.message ? res.data.message : "");
+              //    setTimeout(() => {
+              //       navigate("/");
+              //     }, 500)
             }
         });
         setLoading(false);

@@ -62,31 +62,16 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
     const verifyOTPForm = (data) => {
         setLoading(true);
 
-        const stepTwoInfo = {
-            amount: depositInfo.amount,
-            account_id: depositInfo.bankAccount ? depositInfo.bankAccount : "",
-            description: depositInfo.description,
-            transaction_pin: data.otp
-        };
-
-        const loanData = {
-            account_id: savedData.account_id,
-            amount: savedData.amount,
-            tenor_in_months: savedData.tenor_in_months,
-            loan_id: savedData.loan_id,
-        }
-
-        const transferInfo = {
-            amount: depositInfo.amount,
-            description: depositInfo.description,
-            account_id: depositInfo.accountID,
-            beneficiary_name: depositInfo.beneficiary_name,
-            destination_account: depositInfo.destination_account,
-            destination_bank: depositInfo.destination_bank,
-            transaction_pin: data.otp
-        }
 
         if (typeUrl === "withdrawal") {
+
+            const stepTwoInfo = {
+                amount: depositInfo.amount,
+                account_id: depositInfo.bankAccount ? depositInfo.bankAccount : "",
+                description: depositInfo.description,
+                transaction_pin: data.otp
+            };
+
             apiOperation.post("/withdrawal", stepTwoInfo).then((res) => {
                 console.log("withdrawal form response checker", res.data)
                 if (res.data.success === false) {
@@ -101,6 +86,15 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
             });
         }
         else if (typeUrl === "deposit") {
+
+            const stepTwoInfo = {
+                amount: depositInfo.amount,
+                account_id: depositInfo.bankAccount ? depositInfo.bankAccount : "",
+                description: depositInfo.description,
+                transaction_pin: data.otp
+            };
+
+            
             apiOperation.post("/deposit", stepTwoInfo).then((res) => {
                 console.log("deposit form response checker", res.data)
                 if (res.data.success === false) {
@@ -114,6 +108,17 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
                 }
             });
         } else if (typeUrl === "transfer") {
+
+            const transferInfo = {
+                amount: depositInfo.amount,
+                description: depositInfo.description,
+                account_id: depositInfo.accountID,
+                beneficiary_name: depositInfo.beneficiary_name,
+                destination_account: depositInfo.destination_account,
+                destination_bank: depositInfo.destination_bank,
+                transaction_pin: data.otp
+            }
+
             if (depositInfo.transactionType  === "inter"){
                 apiOperation.post("/transfer/inter", transferInfo).then((res) => {
                     // console.log("apply form Info", transferInfo);
@@ -149,6 +154,15 @@ const OperationsSummary = ({ setStepTwo, typeUrl, setStepThree }) => {
                 });
             }
         } else {
+
+            const loanData = {
+                account_id: savedData.account_id,
+                amount: savedData.amount,
+                tenor_in_months: savedData.tenor_in_months,
+                loan_id: savedData.loan_id,
+            }
+
+
             apiLoan.post("/apply", loanData).then((res) => {
                 console.log("apply form Info", loanData);
                 // console.log("deposit form response checker", res.data)

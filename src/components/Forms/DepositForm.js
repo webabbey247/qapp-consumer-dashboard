@@ -17,13 +17,14 @@ import {
     FormInputDropdownIcon
 } from '../../assets/styles/FormCss';
 import { AuthTopContainer } from '../../assets/styles/AuthCss';
+import { isEmpty } from 'lodash';
 
-const DepositForm = ({setStepTwo}) => {
+const DepositForm = ({setStepTwo, accounts}) => {
     const [loading, setLoading] = useState(false);
     const [accountDropdown, setAccountDropdown] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState('');
-    const data = localStorage.getItem("accounts");
-    const accounts = JSON.parse(data);
+    // const data = localStorage.getItem("accounts");
+    // const accounts = JSON.parse(data);
 
 
     const validationSchema = yup.object().shape({
@@ -87,7 +88,7 @@ const DepositForm = ({setStepTwo}) => {
                         <FormInputDropdownIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputDropdownIcon>
                         {accountDropdown  &&  (
                             <BankAccountDropdown>
-                            {accounts.map((item, index) => {
+                            {(!isEmpty(accounts)) && accounts.map((item, index) => {
                                 return (
                                     <BankAccountDropdownList onClick={() => { 
                                         setSelectedAccount(item);

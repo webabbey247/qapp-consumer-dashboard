@@ -4,6 +4,7 @@ import NumberFormat from 'react-number-format';
 import TotalAccountBalance from "./TotalAccountBalance";
 import { apiOperation } from "../../utils/config";
 import { Content2Column2, ContentRow, CustomDiv } from "../../GlobalCss";
+import { isEmpty } from "lodash";
 
 export const AccountSummaryContainer = styled.div`
   margin-bottom: 1rem;
@@ -58,16 +59,20 @@ export const SpendTodayBottomText = styled.h4`
   color: #f7f7f7;
 `;
 
-const AccountSummary = ({accountModal, setAccountModal}) => {
+const AccountSummary = ({data, accountModal, setAccountModal}) => {
+  console.log(data);
 const [presentSpending, setPresentSpending] = useState('');  
-const getBankAcc = localStorage.getItem("accounts");
-const accounts = JSON.parse(getBankAcc);
+// const getBankAcc = localStorage.getItem("accounts");
+const accounts = data;
 
 const todaySpent = () => {
   apiOperation.get("/account/today-spend").then((res) => {
     if(res.data.success === false) {
-    } else {   
-      setPresentSpending(res.data.result.today_spent)
+      console.log(res.data.message ? res.data.message : "");
+    } else {  
+      // if(!isEmpty(res.data.result.today_spent)) {
+        setPresentSpending(res.data.result.today_spent)
+      // }
     }
 });
 }
@@ -87,7 +92,7 @@ useEffect(() => todaySpent());
          <SpendTodayContainer>
             <SpendTodayTopText>Today Spend</SpendTodayTopText>
             <NumberFormat
-            value={presentSpending}
+            value={presentSpending ? presentSpending : "0"}
             displayType="text"
             thousandSeparator
             decimalScale={2}

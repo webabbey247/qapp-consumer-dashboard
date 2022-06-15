@@ -8,6 +8,7 @@ import NumberFormat from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
 import { ContentRow, ContentFullColumn, DefaultButton, GeneralMdText, GeneralSmText, CustomDiv } from '../../GlobalCss';
 import { FormInput } from '../../assets/styles/FormCss';
+import { isEmpty } from 'lodash';
 export const ContentButtonWrapper = styled.div`
 padding: 1rem 0;
 display: flex;
@@ -21,11 +22,12 @@ padding: 0 1rem 2rem;
 `;
 
 export const LoanCardContainer = styled.div`
-background: rgba(3, 33, 48, 0.57);
+// background: rgba(3, 33, 48, 0.57);
 border-radius: 6px;
 padding: 1rem  1rem 0.5rem;
 margin: 1rem;
 cursor: pointer;
+background: ${(props) => props.background || null};
 `;
 
 export const LoanFormContainer = styled.form`
@@ -36,6 +38,7 @@ justify-content: center;
 
 const LoanEligibilitySummary = ({ eligibleData, setStepTwo, setStepThree }) => {
     const navigate = useNavigate();
+    const [bgColor, setBgColor] = useState(false)
     const [preferredAccount, setPreferredAccount] = useState('');
     // console.log("account ID checker", preferredAccount.accountId ? preferredAccount.accountId : "")
     const { register, handleSubmit } = useForm();
@@ -69,10 +72,13 @@ const LoanEligibilitySummary = ({ eligibleData, setStepTwo, setStepThree }) => {
                             <GeneralMdText fontSize="14px" lineHeight="18px" textAlign="center" color="#FFFFFF" fontWeight="400" textTransform="unset" margin="1rem 0" padding="0 2rem">Please select account by clicking any of the eligibilty accounts</GeneralMdText>
                         </ContentFullColumn>
                         <ContentFullColumn>
-                            {eligibleData.map((item, index) => {
+                            {(!isEmpty(eligibleData)) && eligibleData.map((item, index) => {
                                 return (
-                                    <LoanCardContainer key={index}
-                                        onClick={() => setPreferredAccount(item)}>
+                                    <LoanCardContainer background={bgColor ? "rgba(12, 13, 13, 0.57)" : "rgba(3, 33, 48, 0.57)"} key={index}
+                                        onClick={() => {
+                                            setPreferredAccount(item)
+                                            setBgColor(true)
+                                        }}>
                                         <CustomDiv display="flex">
                                             <GeneralMdText fontSize="14px" lineHeight="21px" textAlign="left" color="#F7F7F7" fontWeight="400" textTransform="Capitalize">{item.accountName}</GeneralMdText>
                                             <GeneralSmText fontSize="10px" lineHeight="13px" textAlign="right" color="#F7F7F7" fontWeight="400" textTransform="Capitalize">Account NO. {item.accountNumber}</GeneralSmText>

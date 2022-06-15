@@ -46,7 +46,7 @@ padding: 1rem 0;
 margin: 1rem 0;
 `;
 
-const TransferContent = () => {
+const TransferContent = ({data}) => {
   const [stepTwo, setStepTwo] = useState(false);
   return (
     <>
@@ -56,7 +56,7 @@ const TransferContent = () => {
           {stepTwo ? (
             <OperationsSummary typeUrl="transfer" setStepTwo={setStepTwo} />
           ) : (
-            <TransferForm setStepTwo={setStepTwo} />
+            <TransferForm accounts={data} setStepTwo={setStepTwo} />
           )}
         </ContentFormWrapper>
       </ContentBottomContainer>

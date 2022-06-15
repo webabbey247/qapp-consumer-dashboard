@@ -234,7 +234,7 @@ const Sidebar = () => {
                 </CustomDiv>
               )}
 
-              <SidebarNavLink to="/dashboard/cards">
+              <SidebarNavLink to="/dashboard">
                 <SidebarNavWrapper>
                   <SidebarNavIcon src={cardIcon} alt="Cards" />
                   <SidebarNavLabel>Cards</SidebarNavLabel>
@@ -242,7 +242,7 @@ const Sidebar = () => {
               </SidebarNavLink>
 
 
-              <SidebarNavLink to="/dashboard/cards">
+              <SidebarNavLink to="/dashboard">
                 <SidebarNavWrapper>
                   <SidebarNavIcon src={cardIcon} alt="Utility" />
                   <SidebarNavLabel>Utility</SidebarNavLabel>

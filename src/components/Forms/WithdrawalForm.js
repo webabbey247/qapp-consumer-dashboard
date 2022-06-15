@@ -10,20 +10,22 @@ import { ContentRow, ContentFullColumn, CustomDiv, GeneralMdText, DefaultButton,
 import {
     ContentForm,
     FormLabel,
+    FormInputDropdownIcon,
     FormInput,
-    FormInputIcon,
     BankAccountDropdown,
     BankAccountDropdownList
 } from '../../assets/styles/FormCss';
 import { AuthTopContainer } from '../../assets/styles/AuthCss';
+import { isEmpty } from 'lodash';
 
-const WithdrawalForm = ({setStepTwo}) => {
+const WithdrawalForm = ({setStepTwo, accounts}) => {
     const [loading, setLoading] = useState(false);
     const [accountDropdown, setAccountDropdown] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState('');
-    const data = localStorage.getItem("accounts");
-    const accounts = JSON.parse(data);
-    // console.log("account dropdown checker", accounts);
+    // const data = localStorage.getItem("accounts");
+    // const accounts = JSON.parse(data);
+
+    console.log("account dropdown checker", accounts);
 
 
     const validationSchema = yup.object().shape({
@@ -88,10 +90,10 @@ const WithdrawalForm = ({setStepTwo}) => {
                         <FormLabel>Preferred Bank Account</FormLabel>
                         <FormInput onClick={() => setAccountDropdown(!accountDropdown)} name='bankAccount' type="text" placeholder="Select bank" readOnly {...register("bankAccount")}
                         value={selectedAccount ? (`${selectedAccount.accountName} (${selectedAccount.accountNumber})`) : ""} />
-                        <FormInputIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
+                        <FormInputDropdownIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputDropdownIcon>
                         {accountDropdown  &&  (
                             <BankAccountDropdown>
-                            {accounts.map((item, index) => {
+                            {(!isEmpty(accounts)) && accounts.map((item, index) => {
                                 return (
                                     <BankAccountDropdownList onClick={() => { 
                                         setSelectedAccount(item);

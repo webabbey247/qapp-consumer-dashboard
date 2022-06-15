@@ -45,25 +45,17 @@ padding: 1rem 0;
 margin: 1rem 0;
 `;
 
-const LoanContent = () => {
+const LoanContent = ({data}) => {
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
-  const [loanData, setLoanData] = useState('');
-
-React.useEffect(() => {
-  const operationInfo = JSON.parse(localStorage.getItem('loans'));
-  if (operationInfo !== null) {
-    setLoanData(operationInfo)
-  }
-}, [])
-
+console.log("ttotototo", data);
 
   return (
     <>
       <ContentBottomContainer>
         <LoanOptionTabs stepOne={stepOne} stepTwo={stepTwo} />
         <ContentFormWrapper>
-            <LoanOptionsForm loanData={loanData} setStepOne={setStepOne} setStepTwo={setStepTwo} />
+            <LoanOptionsForm loanData={data} setStepOne={setStepOne} setStepTwo={setStepTwo} />
         </ContentFormWrapper>
       </ContentBottomContainer>
     </>

@@ -50,7 +50,7 @@ margin: 1rem 0;
 // export const
 
 
-const WithdrawalContent = () => {
+const WithdrawalContent = ({data}) => {
   const [stepTwo, setStepTwo] = useState(false);
   return (
     <>
@@ -60,7 +60,7 @@ const WithdrawalContent = () => {
           {stepTwo ? (
             <OperationsSummary typeUrl="withdrawal" setStepTwo={setStepTwo} />
           ) : (
-            <WithdrawalForm setStepTwo={setStepTwo} />
+            <WithdrawalForm accounts={data} setStepTwo={setStepTwo} />
           )}
         </ContentFormWrapper>
       </ContentBottomContainer>

@@ -31,6 +31,11 @@ export const TransactionHistoryListChild = styled.div`
   justify-content: space-between;
   padding: 1rem;
   border: 1px solid rgba(247, 247, 247, 0.12);
+  border-top: none;
+
+  &:first-child {
+    border-top: 1px solid rgba(247, 247, 247, 0.12);
+  }
 `;
 
 export const TransactionHistoryListLTR = styled.div`

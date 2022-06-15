@@ -108,7 +108,13 @@ const LoginForm = () => {
                     </ContentFullColumn>
                     <ContentFullColumn>
                         <CustomDiv display="flex" flexDirection="column" justifyContent="flex-end" width="100%">
-                            <GeneralSmText fontWeight="400" fontSize="15px" lineHeight="25px" color="#F7F7F7" textTransform="unset" opacity="0.8" textAlign="center" margin="1rem 0">Don’t have internet banking?
+                            <GeneralSmText fontWeight="400" fontSize="15px" lineHeight="25px" color="#F7F7F7" textTransform="unset" opacity="0.8" textAlign="center" margin="1.5rem 0 0.5rem">Don’t have internet banking?
+                                <CustomRouterLink to='/auth/activate-online-banking' fontWeight="400" fontSize="15px" lineHeight="25px" color="#FC7620" textDecoration="none" margin="0 0.3rem">Enrol Now</CustomRouterLink>
+                            </GeneralSmText>
+                        </CustomDiv>
+
+                        <CustomDiv display="flex" flexDirection="column" justifyContent="flex-end" width="100%">
+                            <GeneralSmText fontWeight="400" fontSize="15px" lineHeight="25px" color="#F7F7F7" textTransform="unset" opacity="0.8" textAlign="center">Not a customer?
                                 <CustomRouterLink to='/auth/register' fontWeight="400" fontSize="15px" lineHeight="25px" color="#FC7620" textDecoration="none" margin="0 0.3rem">Sign Up</CustomRouterLink>
                             </GeneralSmText>
                         </CustomDiv>

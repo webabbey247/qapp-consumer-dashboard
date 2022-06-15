@@ -11,13 +11,15 @@ import {
     ContentForm,
     FormLabel,
     FormInput,
+    FormInputDropdownIcon,
     FormInputIcon,
     BankAccountDropdown,
     BankAccountDropdownList
 } from '../../assets/styles/FormCss';
 import { AuthTopContainer } from '../../assets/styles/AuthCss';
+import { isEmpty } from 'lodash';
 
-const TransferForm = ({ setStepTwo }) => {
+const TransferForm = ({setStepTwo, accounts}) => {
     const [loading, setLoading] = useState(false);
     const [toggleBank, setToggleBank] = useState("intra");
     const [accountDropdown, setAccountDropdown] = useState(false);
@@ -25,8 +27,8 @@ const TransferForm = ({ setStepTwo }) => {
     const [bankDropdown, setBankDropdown] = useState(false);
     const [bankData, setBankData] = useState('');
     const [bank, setBank] = useState('');
-    const data = localStorage.getItem("accounts");
-    const accounts = JSON.parse(data);
+    // const data = localStorage.getItem("accounts");
+    // const accounts = JSON.parse(data);
 
 
 
@@ -113,10 +115,10 @@ const TransferForm = ({ setStepTwo }) => {
                         <FormLabel>Preferred Bank Account</FormLabel>
                         <FormInput onClick={() => setAccountDropdown(!accountDropdown)} name='bankAccount' type="text" placeholder="Select Account" readOnly {...register("bankAccount")}
                             value={selectedAccount ? (`${selectedAccount.accountName} (${selectedAccount.accountNumber})`) : ""} />
-                        <FormInputIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
+                        <FormInputDropdownIcon onClick={() => setAccountDropdown(!accountDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputDropdownIcon>
                         {accountDropdown && (
                             <BankAccountDropdown>
-                                {accounts.map((item, index) => {
+                                {(!isEmpty(accounts)) && accounts.map((item, index) => {
                                     return (
                                         <BankAccountDropdownList onClick={() => {
                                             setSelectedAccount(item);
@@ -163,7 +165,7 @@ const TransferForm = ({ setStepTwo }) => {
                             <FormLabel>Recipient Bank</FormLabel>
                             <FormInput onClick={() => setBankDropdown(!bankDropdown)} name='recipientBank' type="text" placeholder="Select Bank" readOnly {...register("recipientBank")}
                                 value={bank ? (`${bank.name}`) : ""} />
-                            <FormInputIcon onClick={() => setBankDropdown(!bankDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputIcon>
+                            <FormInputDropdownIcon onClick={() => setBankDropdown(!bankDropdown)}><FaChevronCircleDown fontSize="20px" color='#1A4153' /></FormInputDropdownIcon>
                             {bankDropdown && (
                                 <BankAccountDropdown>
                                     {bankData.map((item, index) => {

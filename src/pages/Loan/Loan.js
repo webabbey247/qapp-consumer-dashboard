@@ -4,12 +4,15 @@ import LoanContent from '../../components/Content/Loans/LoanContent';
 import { apiLoan } from '../../utils/config';
 
 const Loan = () => {  
+  const [loans, setLoans] = React.useState('')
+
   const getLoans = () => {
     apiLoan.get("/loans").then((res) => {
         if(res.data.success === false) {
           console.log(res.data ? res.data : "");
         } else {   
-          localStorage.setItem("loans", JSON.stringify(res.data));
+          setLoans(res.data)
+          // localStorage.setItem("loans", JSON.stringify(res.data));
           console.log("Loan query checker", res.data ? res.data : "");
         }
     });
@@ -21,7 +24,7 @@ const Loan = () => {
 
   return (
     <DashboardLayout>
-        <LoanContent title="Loans" />
+        <LoanContent data={loans} title="Loans" />
       </DashboardLayout>
   )
 }

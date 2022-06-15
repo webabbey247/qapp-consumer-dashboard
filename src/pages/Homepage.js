@@ -8,7 +8,7 @@ import AccountSummaryChild from "../components/AccountSummary/AccountSummaryChil
 import { Content2Column2, ContentFullColumn, ContentRow, CustomDiv, GeneralMdText } from "../GlobalCss";
 import { apiOperation } from "../utils/config";
 import { closeIcon } from "../assets";
-
+import { isEmpty } from "lodash";
 
 
 
@@ -91,12 +91,13 @@ const Homepage = () => {
 
   const getAccount = () => {
     apiOperation.get("/account/accounts").then((res) => {
-      // console.log("Account list checker", res.data);
+      console.log("Account list checker", res.data);
       if (res.data.success === false) {
-        console.log(res.data.message ? res.data.message : "");
+        console.log("pls confirm", res.data.message ? res.data.message : "");
       } else {
-        setAccounts(res.data.result)
-        localStorage.setItem("accounts", JSON.stringify(res.data.result));
+        if(!isEmpty(res.data.result)){
+          setAccounts(res.data.result)
+        }
         console.log("Account query checker", res.data.result ? res.data.result : "");
       }
     });
@@ -109,7 +110,7 @@ const Homepage = () => {
       <DashboardLayout>
         <ContentRow>
           <Content2Column2>
-            <AccountSummary accountModal={accountModal} setAccountModal={setAccountModal} />
+            <AccountSummary data={accounts} accountModal={accountModal} setAccountModal={setAccountModal} />
           </Content2Column2>
           <Content2Column2>
             <Navigations />
@@ -126,7 +127,7 @@ const Homepage = () => {
         <ModalContainer>
           <ModalWrapper>
             <ModalContent>
-              {accounts.map((item, index) => {
+              {!isEmpty(accounts) && accounts.map((item, index) => {
                 return (
                   <AccountSummaryChild data={item} index={index} />
                 )

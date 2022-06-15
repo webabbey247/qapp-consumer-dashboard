@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router,  Routes, Route } from "react-router-dom";
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { GlobalStyle } from "./GlobalCss";
 
 // @import Auth Pages
@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <GlobalStyle />
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       <Routes>
         <Route exact path='/' element={<Login />} />
         <Route exact path='/auth/register' element={<Register />} />
