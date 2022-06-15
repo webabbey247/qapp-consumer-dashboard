@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import { toast } from 'react-toastify';
 import styled from "styled-components";
 import { dummyThemeLogo, dashboardIcon, cardIcon, loanNavIcon, serviceIcon, settingIcon, menuDropdownIcon, menuDropRightIcon } from "../../assets";
 import { CustomDiv } from "../../GlobalCss";
-
 
 
 const SidebarContainer = styled.div`
@@ -180,8 +180,23 @@ const SidebarSubMenuLabel = styled.span`
 `;
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const [dropDownOne, setDropDownOne] = React.useState(false);
   const [dropDownTwo, setDropDownTwo] = React.useState(false);
+
+  const LogoutUser = () => {
+    localStorage.removeItem("b_token");
+    localStorage.removeItem("b_user");
+    localStorage.removeItem("operation");
+    localStorage.removeItem("depositData");
+    localStorage.removeItem("savedData");
+    localStorage.removeItem("resetPassDump");
+
+    setTimeout(() => {
+      navigate("/");
+      toast.success("You have successfully logged out!");
+    }, 500)
+  }
 
   return (
     <>
@@ -286,7 +301,7 @@ const Sidebar = () => {
 
           <SidebarFooter>
             <SidebarFooterTop>
-              <SidebarFooterBtn>Logout</SidebarFooterBtn>
+              <SidebarFooterBtn onClick={LogoutUser}>Logout</SidebarFooterBtn>
               <SidebarFooterBtn>Support</SidebarFooterBtn>
             </SidebarFooterTop>
             <SidebarFooterBottomText>v 1.0.0</SidebarFooterBottomText>
