@@ -120,7 +120,6 @@ const RegisterForm = () => {
         setLoading(false);
         reset();
     };
-
     return (
         <>
         
