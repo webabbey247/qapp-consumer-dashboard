@@ -111,10 +111,10 @@ const RegisterForm = () => {
                 console.log(res.data.message ? res.data.message : "")
             } else {
               console.log("register response", res.data);
-              // toast.success(res.data.message ? res.data.message : "");
-              //    setTimeout(() => {
-              //       navigate("/");
-              //     }, 500)
+              toast.success(res.data.message ? res.data.message : "");
+                 setTimeout(() => {
+                    navigate("/");
+                  }, 500)
             }
         });
         setLoading(false);
